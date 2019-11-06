@@ -7,11 +7,6 @@ import {
   deleteEvent
 } from './../creators/events'
 import heroku from './../../api/heroku'
-// import {
-//   ROOT_URL,
-//   EVENTS,
-//   QUERYSTRING
-// } from './../../api/heroku'
 
 
 export function asyncReadEvents () {
@@ -19,7 +14,6 @@ export function asyncReadEvents () {
     const response = await axios( {
       method: 'GET',
       url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING
-      // url: ROOT_URL + EVENTS + QUERYSTRING
     } )
     dispatch( readEvents( response ) )
   }
@@ -29,28 +23,28 @@ export function asyncReadEvents () {
 //   return async dispatch => {
 //     const response = await axios( {
 //       method: 'GET',
-//       url: ROOT_URL + EVENTS + id + QUERYSTRING
+//       url: heroku.ROOT_URL + heroku.EVENTS + id + heroku.QUERYSTRING
 //     } )
 //     dispatch( readEvent( response ) )
 //   }
 // }
 
-// export function asyncCreateEvent ( values ) {
-//   return async dispatch => {
-//     await axios( {
-//       method: 'POST',
-//       url: ROOT_URL + EVENTS + QUERYSTRING,
-//       data: values
-//     } )
-//     dispatch( createEvent( values ) )
-//   }
-// }
+export function asyncCreateEvent ( values ) {
+  return async dispatch => {
+    await axios( {
+      method: 'POST',
+      url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING,
+      data: values
+    } )
+    dispatch( createEvent( values ) )
+  }
+}
 
 // export function asyncUpdateEvent ( values ) {
 //   return async dispatch => {
 //     await axios( {
 //       method: 'PUT',
-//       url: ROOT_URL + EVENTS + values.id + QUERYSTRING,
+//       url: heroku.ROOT_URL + heroku.EVENTS + values.id + heroku.QUERYSTRING,
 //       data: values
 //     } )
 //     dispatch( updateEvent( values ) )
@@ -61,7 +55,7 @@ export function asyncReadEvents () {
 //   return async dispatch => {
 //     await axios( {
 //       method: 'DELETE',
-//       url: ROOT_URL + EVENTS + id + QUERYSTRING
+//       url: heroku.ROOT_URL + heroku.EVENTS + id + heroku.QUERYSTRING
 //     } )
 //     dispatch( deleteEvent( id ) )
 //   }

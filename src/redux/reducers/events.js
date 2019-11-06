@@ -16,8 +16,8 @@ export default function ( state = initialState(), action ) {
       return { items: action.response.data }
     // case types.READ_EVENT:
     //   return { ...items, item: action.response.data }
-    // case types.CREATE_EVENT:
-    //   return { ...items, [ action.values.id ]: action.values }
+    case types.CREATE_EVENT:
+      return { ...items, [ action.values.id ]: action.values }
     // case types.UPDATE_EVENT:
     //   return { ...items, [ action.values.id ]: action.values }
     // case types.DELETE_EVENT:

@@ -14,11 +14,10 @@ ReactDOM.render(
   <Provider store={ store }>
     <BrowserRouter>
       <Switch>
-        <EventsIndex />
-        {/* <Route path="/event/edit/:id" component={ EventEdit } />
+        {/* <Route path="/event/edit/:id" component={ EventEdit } /> */}
         <Route path="/event/new" component={ EventNew } />
-        <Route path="/event/:id" component={ EventShow } />
-        <Route path="/events" component={ EventsIndex } /> */}
+        {/* <Route path="/event/:id" component={ EventShow } /> */}
+        <Route path="/" component={ EventsIndex } />
       </Switch>
     </BrowserRouter>
   </Provider>

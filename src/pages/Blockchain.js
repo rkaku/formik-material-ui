@@ -1,14 +1,14 @@
 import React from 'react'
-import './../App.css'
+import './../styles/App.css'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncReadEvents } from './../redux/async/events'
+import { asyncReadEvents } from '../redux/async/events'
 
 
 export default function Container () {
-  function EventsIndex () {
+  function Blockchain () {
     return (
       <>
         <table>
@@ -46,5 +46,5 @@ export default function Container () {
       )
     } )
   }, [ items ] )
-  return <EventsIndex />
+  return <Blockchain />
 }

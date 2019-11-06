@@ -1,4 +1,3 @@
-import './../App.css'
 import React from 'react'
 import * as ReactRedux from 'react-redux'
 import * as ReactRouter from 'react-router-dom'
@@ -27,25 +26,28 @@ import {
 import MuiTextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/styles'
 import styled from 'styled-components'
-import { asyncCreateEvent } from './../redux/async/events'
+import { asyncCreateEvent } from '../redux/async/events'
 
 
 export default function Container () {
-  function EventsIndex () {
+  function Wallet () {
     return (
       <Formik
         initialValues={
           {
-            title: "",
-            body: ""
+            privateKey: "",
+            publicKey: "",
+            amount: ""
           }
         }
         validationSchema={
           Yup.object(
             {
-              title: Yup.string()
+              privateKey: Yup.string()
                 .required( "Required" ),
-              body: Yup.string()
+              publicKey: Yup.string()
+                .required( "Required" ),
+              amount: Yup.number()
                 .required( "Required" )
             }
           )
@@ -59,20 +61,30 @@ export default function Container () {
         { ( { isSubmitting, isValid } ) => (
           <Form>
             <Field
-              name="title"
-              label="Title"
+              name="privateKey"
+              label="Private Key"
               type="text"
-              placeholder="Title"
+              placeholder="Private Key"
               component={ TextField }
               fullWidth
               variant="outlined"
               margin="normal"
             />
             <Field
-              name="body"
-              label="Body"
+              name="publicKey"
+              label="Public Key"
               type="text"
-              placeholder="Body"
+              placeholder="Public Key"
+              component={ TextField }
+              fullWidth
+              variant="outlined"
+              margin="normal"
+            />
+            <Field
+              name="amount"
+              label="Amount"
+              type="text"
+              placeholder="Amount"
               component={ TextField }
               fullWidth
               variant="outlined"
@@ -106,5 +118,5 @@ export default function Container () {
   const _handleSubmit = React.useCallback( ( values ) => {
     dispatch( asyncCreateEvent( values ) )
   }, [ dispatch ] )
-  return <EventsIndex />
+  return <Wallet />
 }

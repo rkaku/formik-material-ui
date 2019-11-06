@@ -23,7 +23,7 @@ export default function Container () {
             { tbodyDisplay() }
           </tbody>
         </table>
-        <Link to="/events/new">New Event</Link>
+        <Link to="/event/new">New Event</Link>
       </>
     )
   }

@@ -1,4 +1,7 @@
+import './../App.css'
 import React from 'react'
+import * as ReactRedux from 'react-redux'
+import * as ReactRouter from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Formik,
@@ -22,11 +25,8 @@ import {
   FormControlLabel,
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField'
-import './../App.css'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux';
 import { asyncCreateEvent } from './../redux/async/events'
 
 
@@ -51,11 +51,12 @@ export default function Container () {
           )
         }
         onSubmit={ ( values, { setSubmitting } ) => {
-          handleSubmit( values )
+          _handleSubmit( values )
           setSubmitting( false )
+          history.push( '/' )
         } }
       >
-        { ( { isSubmitting } ) => (
+        { ( { isSubmitting, isValid } ) => (
           <Form>
             <Field
               name="title"
@@ -81,7 +82,7 @@ export default function Container () {
               type="submit"
               variant="outlined"
               color="primary"
-              disabled={ isSubmitting }
+              disabled={ !isValid || isSubmitting }
             >
               Submit
             </Button>
@@ -89,7 +90,7 @@ export default function Container () {
               type="button"
               variant="outlined"
               color="secondary"
-              component={ Link }
+              component={ ReactRouter.Link }
               to="/"
             >
               Cancel
@@ -100,8 +101,9 @@ export default function Container () {
     )
   }
 
-  const dispatch = useDispatch()
-  const handleSubmit = React.useCallback( ( values ) => {
+  const history = ReactRouter.useHistory()
+  const dispatch = ReactRedux.useDispatch()
+  const _handleSubmit = React.useCallback( ( values ) => {
     dispatch( asyncCreateEvent( values ) )
   }, [ dispatch ] )
   return <EventsIndex />

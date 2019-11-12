@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './../../api/axiosHeroku'
 import {
   readEvent,
   readEvents,
@@ -13,7 +13,7 @@ export function asyncReadEvents () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
-      url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING
+      url: heroku.EVENTS + heroku.QUERYSTRING
     } )
     dispatch( readEvents( response ) )
   }
@@ -33,7 +33,7 @@ export function asyncCreateEvent ( values ) {
   return async dispatch => {
     await axios( {
       method: 'POST',
-      url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING,
+      url: heroku.EVENTS + heroku.QUERYSTRING,
       data: values
     } )
     dispatch( createEvent( values ) )

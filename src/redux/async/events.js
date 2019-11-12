@@ -13,8 +13,9 @@ export function asyncReadEvents () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
-      url: heroku.EVENTS + heroku.QUERYSTRING
+      url: heroku.WALLET
     } )
+    console.log( { response } )
     dispatch( readEvents( response ) )
   }
 }
@@ -33,7 +34,7 @@ export function asyncCreateEvent ( values ) {
   return async dispatch => {
     await axios( {
       method: 'POST',
-      url: heroku.EVENTS + heroku.QUERYSTRING,
+      url: heroku.SEND,
       data: values
     } )
     dispatch( createEvent( values ) )

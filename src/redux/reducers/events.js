@@ -17,13 +17,12 @@ export default function ( state = initialState(), action ) {
     case types.READ_EVENT:
       return { item: action.response.data }
     case types.CREATE_EVENT:
-      console.log( 'create', action.values )
+      // console.log( 'create', action.values )
       return items
-    // case types.UPDATE_EVENT:
-    //   return { ...items, [ action.values.id ]: action.values }
-    // case types.DELETE_EVENT:
-    //   delete items[ action.id ]
-    //   return { ...items }
+    case types.UPDATE_EVENT:
+      return items
+    case types.DELETE_EVENT:
+      return items
     default:
       return { ...items }
   }

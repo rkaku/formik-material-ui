@@ -9,7 +9,7 @@ import {
 import heroku from './../../api/heroku'
 
 
-export function asyncReadEvents () {
+export function asyncReadEvents () { // Wallet
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
@@ -20,7 +20,7 @@ export function asyncReadEvents () {
   }
 }
 
-export function asyncReadEvent () {
+export function asyncReadEvent () { // Pool
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
@@ -30,7 +30,7 @@ export function asyncReadEvent () {
   }
 }
 
-export function asyncCreateEvent ( values ) {
+export function asyncCreateEvent ( values ) { // Send
   return async dispatch => {
     console.log( { values } )
     await axios( {
@@ -46,23 +46,23 @@ export function asyncCreateEvent ( values ) {
   }
 }
 
-// export function asyncUpdateEvent ( values ) {
-//   return async dispatch => {
-//     await axios( {
-//       method: 'PUT',
-//       url: heroku.ROOT_URL + heroku.EVENTS + values.id + heroku.QUERYSTRING,
-//       data: values
-//     } )
-//     dispatch( updateEvent( values ) )
-//   }
-// }
+export function asyncUpdateEvent ( ) { // Mine
+  return async dispatch => {
+    await axios( {
+      method: 'GET',
+      url: heroku.MINE
+    } )
+    console.log('mine')
+    dispatch( updateEvent() )
+  }
+}
 
-// export function asyncDeleteEvent ( id ) {
-//   return async dispatch => {
-//     await axios( {
-//       method: 'DELETE',
-//       url: heroku.ROOT_URL + heroku.EVENTS + id + heroku.QUERYSTRING
-//     } )
-//     dispatch( deleteEvent( id ) )
-//   }
-// }
+export function asyncDeleteEvent () { // Chain
+  return async dispatch => {
+    await axios( {
+      method: 'GET',
+      url: heroku.CHAIN
+    } )
+    dispatch( deleteEvent() )
+  }
+}

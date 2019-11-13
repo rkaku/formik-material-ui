@@ -14,10 +14,10 @@ export function createEvent ( values ) {
   return { type: types.CREATE_EVENT, values }
 }
 
-export function updateEvent ( values ) {
-  return { type: types.UPDATE_EVENT, values }
+export function updateEvent () {
+  return { type: types.UPDATE_EVENT }
 }
 
-export function deleteEvent ( id ) {
-  return { type: types.DELETE_EVENT, id }
+export function deleteEvent () {
+  return { type: types.DELETE_EVENT }
 }

@@ -20,15 +20,15 @@ export function asyncReadEvents () {
   }
 }
 
-// export function asyncReadEvent ( id ) {
-//   return async dispatch => {
-//     const response = await axios( {
-//       method: 'GET',
-//       url: heroku.ROOT_URL + heroku.EVENTS + id + heroku.QUERYSTRING
-//     } )
-//     dispatch( readEvent( response ) )
-//   }
-// }
+export function asyncReadEvent () {
+  return async dispatch => {
+    const response = await axios( {
+      method: 'GET',
+      url: heroku.POOL
+    } )
+    dispatch( readEvent( response ) )
+  }
+}
 
 export function asyncCreateEvent ( values ) {
   return async dispatch => {
@@ -37,6 +37,7 @@ export function asyncCreateEvent ( values ) {
       url: heroku.SEND,
       data: values
     } )
+    console.log( { values } )
     dispatch( createEvent( values ) )
   }
 }

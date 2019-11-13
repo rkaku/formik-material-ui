@@ -42,9 +42,9 @@ export default function Container () {
         validationSchema={
           Yup.object(
             {
-              address: Yup.string()
+              recipient_address: Yup.string()
                 .required( "Required" ),
-              amount: Yup.number()
+              value: Yup.number()
                 .required( "Required" )
             }
           )
@@ -52,13 +52,15 @@ export default function Container () {
         onSubmit={ ( values, { setSubmitting } ) => {
           _handleSubmit( values )
           setSubmitting( false )
-          history.push( '/' )
+          // history.push( '/pool' )
+          values.recipientAddress = ''
+          values.value = ''
         } }
       >
         { ( { isSubmitting, isValid, values } ) => (
           <Form>
             <WalletTextField
-              name="privateKey"
+              name="sender_priv_key"
               label="Private Key"
               type="text"
               placeholder="Private Key"
@@ -68,7 +70,7 @@ export default function Container () {
               margin="normal"
             />
             <WalletTextField
-              name="publicKey"
+              name="sender_pub_key"
               label="Public Key"
               type="text"
               placeholder="Public Key"
@@ -78,7 +80,7 @@ export default function Container () {
               margin="normal"
             />
             <WalletTextField
-              name="address"
+              name="sender_address"
               label="Address"
               type="text"
               placeholder="Address"
@@ -87,22 +89,22 @@ export default function Container () {
               variant="outlined"
               margin="normal"
             />
-            <Field
-              name="address"
+            <WalletTextField
+              name="recipient_address"
               label="Address"
               type="text"
               placeholder="Address"
-              component={TextField}
+              value={ values.recipientAddress }
               fullWidth
               // variant=""
               margin="normal"
             />
-            <Field
-              name="amount"
+            <WalletTextField
+              name="value"
               label="Amount"
               type="text"
               placeholder="Amount"
-              component={ TextField }
+              value={ values.value }
               fullWidth
               // variant=""
               margin="normal"
@@ -125,7 +127,7 @@ export default function Container () {
               Cancel
             </Button>
             <WalletTextField
-              name="privateKey"
+              name="bob_priv_key"
               label="Private Key"
               type="text"
               placeholder="Private Key"
@@ -135,7 +137,7 @@ export default function Container () {
               margin="normal"
             />
             <WalletTextField
-              name="publicKey"
+              name="bob_pub_key"
               label="Public Key"
               type="text"
               placeholder="Public Key"
@@ -145,7 +147,7 @@ export default function Container () {
               margin="normal"
             />
             <WalletTextField
-              name="address"
+              name="bob_address"
               label="Address"
               type="text"
               placeholder="Address"
@@ -197,6 +199,8 @@ export default function Container () {
     bobPrivKey: bob.priv_key,
     bobPubKey: bob.pub_key,
     bobAddress: bob.address,
+    recipientAddress: '',
+    value: ''
   }
   return <Wallet />
 }

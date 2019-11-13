@@ -42,10 +42,8 @@ export default function Container () {
         validationSchema={
           Yup.object(
             {
-              recipient_address: Yup.string()
-                .required( "Required" ),
-              value: Yup.number()
-                .required( "Required" )
+              recipient_address: Yup.string().required( "Required" ),
+              value: Yup.number().positive().required( "Required" )
             }
           )
         }
@@ -57,7 +55,7 @@ export default function Container () {
           values.value = ''
         } }
       >
-        { ( { isSubmitting, isValid, values } ) => (
+        { ( { isSubmitting, isValid, values, touched, errors } ) => (
           <Form>
             <WalletTextField
               name="sender_priv_key"
@@ -90,21 +88,25 @@ export default function Container () {
               margin="normal"
             />
             <WalletTextField
+              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
               name="recipient_address"
               label="Address"
               type="text"
               placeholder="Address"
               value={ values.recipientAddress }
+              required
               fullWidth
               // variant=""
               margin="normal"
             />
             <WalletTextField
+              error={ ( touched.value && !values.value ) || errors.value }
               name="value"
               label="Amount"
               type="text"
               placeholder="Amount"
               value={ values.value }
+              required
               fullWidth
               // variant=""
               margin="normal"
@@ -193,12 +195,12 @@ export default function Container () {
     } )
   }, [ selector ] )
   const initialValues = {
-    alicePrivKey: alice.priv_key,
-    alicePubKey: alice.pub_key,
-    aliceAddress: alice.address,
-    bobPrivKey: bob.priv_key,
-    bobPubKey: bob.pub_key,
-    bobAddress: bob.address,
+    sender_priv_key: alice.priv_key,
+    sender_pub_key: alice.pub_key,
+    sender_address: alice.address,
+    bob_priv_key: bob.priv_key,
+    bob_pub_key: bob.pub_key,
+    bob_address: bob.address,
     recipientAddress: '',
     value: ''
   }

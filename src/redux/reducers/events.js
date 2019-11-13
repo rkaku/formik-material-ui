@@ -12,7 +12,7 @@ export default function ( state = initialState(), action ) {
   const items = state
   switch ( action.type ) {
     case types.READ_EVENTS:
-      console.log( 'read', action.response.data )
+      // console.log( 'read', action.response.data )
       return { items: action.response.data }
     case types.READ_EVENT:
       return { item: action.response.data }

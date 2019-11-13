@@ -27,13 +27,14 @@ export default function Container () {
       <>
         {
           selector && selector.map( ( tran ) => {
-            return tran.map( ( el ) => (
+            console.log( { tran } )
+            return (
               <>
-                <div>{ el.sender_address }</div>
-                <div>{ el.recipient_address }</div>
-                <div>{ el.value }</div>
+                <div>{ tran.sender_address }</div>
+                <div>{ tran.recipient_address }</div>
+                <div>{ tran.value }</div>
               </>
-            ) )
+            )
           } )
         }
       </>

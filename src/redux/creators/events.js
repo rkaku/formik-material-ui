@@ -10,6 +10,7 @@ export function readEvent ( response ) {
 }
 
 export function createEvent ( values ) {
+  console.log( { values } )
   return { type: types.CREATE_EVENT, values }
 }
 

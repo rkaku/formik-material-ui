@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import { useField, useFormikContext } from 'formik';
 
 
-export default function WalletTextField ( { value, ...props } ) {
+export default function WalletTextField ( { ...props } ) {
   const [ field, meta ] = useField( props )
   // const { setFieldValue } = useFormikContext()
   // const _onChange = React.useCallback( ( event ) => {

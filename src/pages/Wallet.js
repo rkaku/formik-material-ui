@@ -35,7 +35,7 @@ export default function Container () {
   function Wallet () {
     return (
       <Formik
-        enableReinitialize={ true }
+        // enableReinitialize={ true }
         initialValues={
           initialValues
         }
@@ -51,8 +51,8 @@ export default function Container () {
           _handleSubmit( values )
           setSubmitting( false )
           // history.push( '/pool' )
-          values.recipientAddress = ''
-          values.value = ''
+          // values.recipientAddress = ''
+          // values.value = ''
         } }
       >
         { ( { isSubmitting, isValid, values, touched, errors } ) => (
@@ -62,7 +62,7 @@ export default function Container () {
               label="Private Key"
               type="text"
               placeholder="Private Key"
-              value={ values.alicePrivKey }
+              // value={ values.alicePrivKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -72,7 +72,7 @@ export default function Container () {
               label="Public Key"
               type="text"
               placeholder="Public Key"
-              value={ values.alicePubKey }
+              // value={ values.alicePubKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -82,34 +82,34 @@ export default function Container () {
               label="Address"
               type="text"
               placeholder="Address"
-              value={ values.aliceAddress }
+              // value={ values.aliceAddress }
               fullWidth
               variant="outlined"
               margin="normal"
             />
             <WalletTextField
-              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
               name="recipient_address"
               label="Address"
               type="text"
               placeholder="Address"
-              value={ values.recipientAddress }
+              // value={ values.recipientAddress }
               required
               fullWidth
               // variant=""
               margin="normal"
+              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
             />
             <WalletTextField
-              error={ ( touched.value && !values.value ) || errors.value }
               name="value"
               label="Amount"
               type="text"
               placeholder="Amount"
-              value={ values.value }
+              // value={ values.value }
               required
               fullWidth
               // variant=""
               margin="normal"
+              error={ ( touched.value && !values.value ) || errors.value }
             />
             <Button
               type="submit"
@@ -133,7 +133,7 @@ export default function Container () {
               label="Private Key"
               type="text"
               placeholder="Private Key"
-              value={ values.bobPrivKey }
+              // value={ values.bobPrivKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -143,7 +143,7 @@ export default function Container () {
               label="Public Key"
               type="text"
               placeholder="Public Key"
-              value={ values.bobPubKey }
+              // value={ values.bobPubKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -153,7 +153,7 @@ export default function Container () {
               label="Address"
               type="text"
               placeholder="Address"
-              value={ values.bobAddress }
+              // value={ values.bobAddress }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -201,8 +201,8 @@ export default function Container () {
     bob_priv_key: bob.priv_key,
     bob_pub_key: bob.pub_key,
     bob_address: bob.address,
-    recipientAddress: '',
-    value: ''
+    // recipient_address: '',
+    // value: ''
   }
   return <Wallet />
 }

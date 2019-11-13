@@ -15,7 +15,7 @@ export function asyncReadEvents () {
       method: 'GET',
       url: heroku.WALLET
     } )
-    console.log( { response } )
+    // console.log( { response } )
     dispatch( readEvents( response ) )
   }
 }
@@ -32,9 +32,13 @@ export function asyncReadEvent () {
 
 export function asyncCreateEvent ( values ) {
   return async dispatch => {
+    console.log( { values } )
     await axios( {
       method: 'POST',
       url: heroku.SEND,
+      // headers: {
+      //   "contentType": "application/json"
+      // },
       data: values
     } )
     console.log( { values } )

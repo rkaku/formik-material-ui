@@ -22,73 +22,94 @@ import {
   MenuItem,
   InputLabel,
   FormControlLabel,
+  // TextField
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/styles'
 import styled from 'styled-components'
-import { asyncCreateEvent } from '../redux/async/events'
+import * as Async from '../redux/async/events'
+import WalletTextField from './../layouts/form/WalletTextField'
 
 
 export default function Container () {
   function Wallet () {
     return (
       <Formik
+        // enableReinitialize={ true }
         initialValues={
-          {
-            privateKey: "",
-            publicKey: "",
-            amount: ""
-          }
+          initialValues
         }
         validationSchema={
           Yup.object(
             {
-              privateKey: Yup.string()
-                .required( "Required" ),
-              publicKey: Yup.string()
-                .required( "Required" ),
-              amount: Yup.number()
-                .required( "Required" )
+              recipient_address: Yup.string().required( "Required" ),
+              value: Yup.number().positive().required( "Required" )
             }
           )
         }
         onSubmit={ ( values, { setSubmitting } ) => {
           _handleSubmit( values )
           setSubmitting( false )
-          history.push( '/' )
+          // history.push( '/pool' )
+          // values.recipientAddress = ''
+          // values.value = ''
         } }
       >
-        { ( { isSubmitting, isValid } ) => (
+        { ( { isSubmitting, isValid, values, touched, errors } ) => (
           <Form>
-            <Field
-              name="privateKey"
+            <WalletTextField
+              name="sender_priv_key"
               label="Private Key"
               type="text"
               placeholder="Private Key"
-              component={ TextField }
+              // value={ values.alicePrivKey }
               fullWidth
               variant="outlined"
               margin="normal"
             />
-            <Field
-              name="publicKey"
+            <WalletTextField
+              name="sender_pub_key"
               label="Public Key"
               type="text"
               placeholder="Public Key"
-              component={ TextField }
+              // value={ values.alicePubKey }
               fullWidth
               variant="outlined"
               margin="normal"
             />
-            <Field
-              name="amount"
-              label="Amount"
+            <WalletTextField
+              name="sender_address"
+              label="Address"
               type="text"
-              placeholder="Amount"
-              component={ TextField }
+              placeholder="Address"
+              // value={ values.aliceAddress }
               fullWidth
               variant="outlined"
               margin="normal"
+            />
+            <WalletTextField
+              name="recipient_address"
+              label="Address"
+              type="text"
+              placeholder="Address"
+              // value={ values.recipientAddress }
+              required
+              fullWidth
+              // variant=""
+              margin="normal"
+              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
+            />
+            <WalletTextField
+              name="value"
+              label="Amount"
+              type="text"
+              placeholder="Amount"
+              // value={ values.value }
+              required
+              fullWidth
+              // variant=""
+              margin="normal"
+              error={ ( touched.value && !values.value ) || errors.value }
             />
             <Button
               type="submit"
@@ -107,6 +128,36 @@ export default function Container () {
             >
               Cancel
             </Button>
+            <WalletTextField
+              name="bob_priv_key"
+              label="Private Key"
+              type="text"
+              placeholder="Private Key"
+              // value={ values.bobPrivKey }
+              fullWidth
+              variant="outlined"
+              margin="normal"
+            />
+            <WalletTextField
+              name="bob_pub_key"
+              label="Public Key"
+              type="text"
+              placeholder="Public Key"
+              // value={ values.bobPubKey }
+              fullWidth
+              variant="outlined"
+              margin="normal"
+            />
+            <WalletTextField
+              name="bob_address"
+              label="Address"
+              type="text"
+              placeholder="Address"
+              // value={ values.bobAddress }
+              fullWidth
+              variant="outlined"
+              margin="normal"
+            />
           </Form>
         ) }
       </Formik>
@@ -115,8 +166,43 @@ export default function Container () {
 
   const history = ReactRouter.useHistory()
   const dispatch = ReactRedux.useDispatch()
+  const selector = ReactRedux.useSelector( state => state.events.items )
   const _handleSubmit = React.useCallback( ( values ) => {
-    dispatch( asyncCreateEvent( values ) )
+    dispatch( Async.asyncCreateEvent( values ) )
   }, [ dispatch ] )
+  React.useEffect( () => {
+    dispatch( Async.asyncReadEvents() )
+  }, [ dispatch ] )
+  console.log( { selector } )
+  console.log( selector[ 0 ] )
+  console.log( typeof selector[ 0 ] )
+  const [ alice, setAlice ] = React.useState( { priv_key: "", pub_key: "", address: "" } )
+  const [ bob, setBob ] = React.useState( { priv_key: "", pub_key: "", address: "" } )
+  React.useMemo( () => {
+    if ( selector[ 0 ] === undefined ) return
+    if ( selector[ 1 ] === undefined ) return
+    const alice = selector[ 0 ]
+    const bob = selector[ 1 ]
+    setAlice( {
+      priv_key: alice.priv_key,
+      pub_key: alice.pub_key,
+      address: alice.address
+    } )
+    setBob( {
+      priv_key: bob.priv_key,
+      pub_key: bob.pub_key,
+      address: bob.address
+    } )
+  }, [ selector ] )
+  const initialValues = {
+    sender_priv_key: alice.priv_key,
+    sender_pub_key: alice.pub_key,
+    sender_address: alice.address,
+    bob_priv_key: bob.priv_key,
+    bob_pub_key: bob.pub_key,
+    bob_address: bob.address,
+    // recipient_address: '',
+    // value: ''
+  }
   return <Wallet />
 }

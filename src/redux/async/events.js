@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './../../api/axiosHeroku'
 import {
   readEvent,
   readEvents,
@@ -13,29 +13,35 @@ export function asyncReadEvents () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
-      url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING
+      url: heroku.WALLET
     } )
+    // console.log( { response } )
     dispatch( readEvents( response ) )
   }
 }
 
-// export function asyncReadEvent ( id ) {
-//   return async dispatch => {
-//     const response = await axios( {
-//       method: 'GET',
-//       url: heroku.ROOT_URL + heroku.EVENTS + id + heroku.QUERYSTRING
-//     } )
-//     dispatch( readEvent( response ) )
-//   }
-// }
+export function asyncReadEvent () {
+  return async dispatch => {
+    const response = await axios( {
+      method: 'GET',
+      url: heroku.POOL
+    } )
+    dispatch( readEvent( response ) )
+  }
+}
 
 export function asyncCreateEvent ( values ) {
   return async dispatch => {
+    console.log( { values } )
     await axios( {
       method: 'POST',
-      url: heroku.ROOT_URL + heroku.EVENTS + heroku.QUERYSTRING,
+      url: heroku.SEND,
+      // headers: {
+      //   "contentType": "application/json"
+      // },
       data: values
     } )
+    console.log( { values } )
     dispatch( createEvent( values ) )
   }
 }

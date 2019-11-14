@@ -25,9 +25,9 @@ export default function C () {
   }
   return (
     <Provider store={ store }>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
     </Provider>
   )
 }

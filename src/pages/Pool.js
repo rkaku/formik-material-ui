@@ -2,16 +2,17 @@ import React from 'react'
 import * as ReactRedux from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import * as Async from '../redux/async/blockchain'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
+import MineSnackbarButton from '../layouts/snackbars/MineSnackbarButton'
 
 
 export default function C () {
@@ -64,6 +65,8 @@ export default function C () {
   console.log( selector )
   return (
     <>
+      <MineSnackbarButton
+        onClick={ _handleOnClick } />
       <Button
         type="button"
         variant="outlined"

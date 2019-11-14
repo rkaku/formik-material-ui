@@ -1,36 +1,36 @@
 import axios from './../../api/axiosHeroku'
 import {
-  readEvent,
-  readEvents,
-  createEvent,
-  updateEvent,
-  deleteEvent
+  getPool,
+  getWallet,
+  sendMoney,
+  getMine,
+  getChain
 } from './../creators/events'
 import heroku from './../../api/heroku'
 
 
-export function asyncReadEvents () { // Wallet
+export function asyncGetWallet () { // Wallet
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.WALLET
     } )
     // console.log( { response } )
-    dispatch( readEvents( response ) )
+    dispatch( getWallet( response ) )
   }
 }
 
-export function asyncReadEvent () { // Pool
+export function asyncGetPool () { // Pool
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.POOL
     } )
-    dispatch( readEvent( response ) )
+    dispatch( getPool( response ) )
   }
 }
 
-export function asyncCreateEvent ( values ) { // Send
+export function asyncSendMoney ( values ) { // Send
   return async dispatch => {
     console.log( { values } )
     await axios( {
@@ -42,27 +42,27 @@ export function asyncCreateEvent ( values ) { // Send
       data: values
     } )
     console.log( { values } )
-    dispatch( createEvent( values ) )
+    dispatch( sendMoney( values ) )
   }
 }
 
-export function asyncUpdateEvent () { // Mine
+export function asyncGetMine () { // Mine
   return async dispatch => {
     await axios( {
       method: 'GET',
       url: heroku.MINE
     } )
-    dispatch( updateEvent() )
+    dispatch( getMine() )
   }
 }
 
-export function asyncDeleteEvent () { // Chain
+export function asyncGetChain () { // Chain
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.CHAIN
     } )
     console.log( { response } )
-    dispatch( deleteEvent( response ) )
+    dispatch( getChain( response ) )
   }
 }

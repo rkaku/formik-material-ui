@@ -1,8 +1,6 @@
 import React from 'react'
 import * as ReactRedux from 'react-redux'
-import * as ReactRouter from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-// import styled from 'styled-components'
 import * as Async from '../redux/async/events'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -56,13 +54,12 @@ export default function C () {
     )
   }
 
-  const history = ReactRouter.useHistory()
   const dispatch = ReactRedux.useDispatch()
   const _handleOnClick = React.useCallback( () => {
-    dispatch( Async.asyncUpdateEvent() )
+    dispatch( Async.asyncGetMine() )
   }, [ dispatch ] )
   React.useEffect( () => {
-    dispatch( Async.asyncReadEvent() )
+    dispatch( Async.asyncGetPool() )
   }, [ dispatch ] )
   const selector = ReactRedux.useSelector( state => state.events.item )
   console.log( selector )
@@ -72,7 +69,7 @@ export default function C () {
         type="button"
         variant="outlined"
         color="primary"
-        onClick={_handleOnClick}
+        onClick={ _handleOnClick }
       >
         Mine
       </Button>

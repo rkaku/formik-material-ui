@@ -5,28 +5,11 @@ import * as Yup from 'yup'
 import {
   Formik,
   Form,
-  Field,
-  ErrorMessage
+  // ErrorMessage,
 } from 'formik'
 import {
-  TextField,
-  Switch,
-  Select,
-  fieldToTextField,
-  TextFieldProps,
-} from 'formik-material-ui'
-import {
   Button,
-  FormControl,
-  LinearProgress,
-  MenuItem,
-  InputLabel,
-  FormControlLabel,
-  // TextField
 } from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField'
-import { makeStyles } from '@material-ui/styles'
-import styled from 'styled-components'
 import * as Async from '../redux/async/events'
 import WalletTextField from './../layouts/form/WalletTextField'
 
@@ -35,7 +18,7 @@ export default function Container () {
   function Wallet () {
     return (
       <Formik
-        // enableReinitialize={ true }
+        // enableReinitialize={ true } :TODO: ???
         initialValues={
           initialValues
         }
@@ -50,8 +33,7 @@ export default function Container () {
         onSubmit={ ( values, { setSubmitting } ) => {
           _handleSubmit( values )
           setSubmitting( false )
-          // history.push( '/pool' )
-          // values.recipientAddress = ''
+          // values.recipientAddress = '' :TODO: Clear
           // values.value = ''
         } }
       >
@@ -62,7 +44,6 @@ export default function Container () {
               label="Private Key"
               type="text"
               placeholder="Private Key"
-              // value={ values.alicePrivKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -72,7 +53,6 @@ export default function Container () {
               label="Public Key"
               type="text"
               placeholder="Public Key"
-              // value={ values.alicePubKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -82,7 +62,6 @@ export default function Container () {
               label="Address"
               type="text"
               placeholder="Address"
-              // value={ values.aliceAddress }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -92,10 +71,8 @@ export default function Container () {
               label="Address"
               type="text"
               placeholder="Address"
-              // value={ values.recipientAddress }
               required
               fullWidth
-              // variant=""
               margin="normal"
               error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
             />
@@ -104,10 +81,8 @@ export default function Container () {
               label="Amount"
               type="text"
               placeholder="Amount"
-              // value={ values.value }
               required
               fullWidth
-              // variant=""
               margin="normal"
               error={ ( touched.value && !values.value ) || errors.value }
             />
@@ -133,7 +108,6 @@ export default function Container () {
               label="Private Key"
               type="text"
               placeholder="Private Key"
-              // value={ values.bobPrivKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -143,7 +117,6 @@ export default function Container () {
               label="Public Key"
               type="text"
               placeholder="Public Key"
-              // value={ values.bobPubKey }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -153,7 +126,6 @@ export default function Container () {
               label="Address"
               type="text"
               placeholder="Address"
-              // value={ values.bobAddress }
               fullWidth
               variant="outlined"
               margin="normal"
@@ -164,14 +136,13 @@ export default function Container () {
     )
   }
 
-  const history = ReactRouter.useHistory()
   const dispatch = ReactRedux.useDispatch()
   const selector = ReactRedux.useSelector( state => state.events.items )
   const _handleSubmit = React.useCallback( ( values ) => {
-    dispatch( Async.asyncCreateEvent( values ) )
+    dispatch( Async.asyncSendMoney( values ) )
   }, [ dispatch ] )
   React.useEffect( () => {
-    dispatch( Async.asyncReadEvents() )
+    dispatch( Async.asyncGetWallet() )
   }, [ dispatch ] )
   console.log( { selector } )
   console.log( selector[ 0 ] )
@@ -202,7 +173,7 @@ export default function Container () {
     bob_pub_key: bob.pub_key,
     bob_address: bob.address,
     // recipient_address: '',
-    // value: ''
+    // value: '' :TODO: ???
   }
   return <Wallet />
 }

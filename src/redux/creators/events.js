@@ -1,23 +1,23 @@
 import types from '../types/events'
 
 
-export function readEvents ( response ) {
-  return { type: types.READ_EVENTS, response: response }
+export function getWallet ( response ) {
+  return { type: types.GET_WALLET, response: response }
 }
 
-export function readEvent ( response ) {
-  return { type: types.READ_EVENT, response }
+export function getPool ( response ) {
+  return { type: types.GET_POOL, response }
 }
 
-export function createEvent ( values ) {
+export function sendMoney ( values ) {
   console.log( { values } )
-  return { type: types.CREATE_EVENT, values }
+  return { type: types.POST_SEND_MONEY, values }
 }
 
-export function updateEvent () {
-  return { type: types.UPDATE_EVENT }
+export function getMine () {
+  return { type: types.GET_MINE }
 }
 
-export function deleteEvent ( response ) {
-  return { type: types.DELETE_EVENT, response }
+export function getChain ( response ) {
+  return { type: types.GET_CHAIN, response }
 }

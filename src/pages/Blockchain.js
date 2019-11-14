@@ -1,35 +1,17 @@
 import React from 'react'
 import * as ReactRedux from 'react-redux'
-import * as ReactRouter from 'react-router-dom'
-import './../styles/App.css'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux';
 import * as Async from '../redux/async/events'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import StarIcon from '@material-ui/icons/Star';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import EnhancedEncryptionOutlinedIcon from '@material-ui/icons/EnhancedEncryptionOutlined';
-import TagFacesOutlinedIcon from '@material-ui/icons/TagFacesOutlined';
-import SecurityOutlinedIcon from '@material-ui/icons/SecurityOutlined';
-import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
-import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined';
-import FaceOutlinedIcon from '@material-ui/icons/FaceOutlined';
-import AttachMoneyOutlinedIcon from '@material-ui/icons/AttachMoneyOutlined';
-import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
-import FormatColorTextOutlinedIcon from '@material-ui/icons/FormatColorTextOutlined';
-import FormatBoldOutlinedIcon from '@material-ui/icons/FormatBoldOutlined';
-import MoodOutlinedIcon from '@material-ui/icons/MoodOutlined';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 
@@ -101,27 +83,6 @@ export default function C () {
                     )
                   } )
                 }
-                {/*
-                <Paper className={ classes.control }>
-                <ListItem button>
-                  <ListItemIcon>
-                  </ListItemIcon>
-                  <ListItemText inset secondary="Sender Address" />
-                </ListItem>
-                <Divider component="li" variant="inset" />
-                <ListItem button>
-                  <ListItemIcon>
-                  </ListItemIcon>
-                  <ListItemText inset secondary="Recipient Address" />
-                </ListItem>
-                <Divider component="li" variant="inset" />
-                <ListItem button>
-                  <ListItemIcon>
-                  </ListItemIcon>
-                  <ListItemText inset secondary="Amount" />
-                </ListItem>
-                </Paper>
-                 */}
                 <Divider />
               </List>
             </Paper>
@@ -132,9 +93,9 @@ export default function C () {
   }
 
 
-  const dispatch = useDispatch()
+  const dispatch = ReactRedux.useDispatch()
   React.useEffect( () => {
-    dispatch( Async.asyncDeleteEvent() )
+    dispatch( Async.asyncGetChain() )
   }, [ dispatch ] )
   const selector = ReactRedux.useSelector( state => state.events.chain )
   console.log( { selector } )
@@ -142,7 +103,6 @@ export default function C () {
   if ( selector !== undefined ) {
     console.log( selector[ 0 ] )
   }
-  // const chains = selector[ 0 ]
   // const aliceAmount = selector[ 1 ] :TODO: Alice Amount
   // const bobAmount = selector[ 2 ] :TODO: Bob Amount
   return (

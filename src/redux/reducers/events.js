@@ -11,18 +11,18 @@ export default function ( state = initialState(), action ) {
 
   const items = state
   switch ( action.type ) {
-    case types.READ_EVENTS:
+    case types.READ_EVENTS: // Wallet
       // console.log( 'read', action.response.data )
       return { items: action.response.data }
-    case types.READ_EVENT:
+    case types.READ_EVENT: // Pool
       return { item: action.response.data }
-    case types.CREATE_EVENT:
+    case types.CREATE_EVENT: // Send
       // console.log( 'create', action.values )
       return items
-    case types.UPDATE_EVENT:
+    case types.UPDATE_EVENT: // Mine
       return items
-    case types.DELETE_EVENT:
-      return items
+    case types.DELETE_EVENT: // Chain
+      return { chain: action.response.data }
     default:
       return { ...items }
   }

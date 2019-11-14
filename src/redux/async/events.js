@@ -46,23 +46,23 @@ export function asyncCreateEvent ( values ) { // Send
   }
 }
 
-export function asyncUpdateEvent ( ) { // Mine
+export function asyncUpdateEvent () { // Mine
   return async dispatch => {
     await axios( {
       method: 'GET',
       url: heroku.MINE
     } )
-    console.log('mine')
     dispatch( updateEvent() )
   }
 }
 
 export function asyncDeleteEvent () { // Chain
   return async dispatch => {
-    await axios( {
+    const response = await axios( {
       method: 'GET',
       url: heroku.CHAIN
     } )
-    dispatch( deleteEvent() )
+    console.log( { response } )
+    dispatch( deleteEvent( response ) )
   }
 }

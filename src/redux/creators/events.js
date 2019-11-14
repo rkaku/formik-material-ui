@@ -18,6 +18,6 @@ export function updateEvent () {
   return { type: types.UPDATE_EVENT }
 }
 
-export function deleteEvent () {
-  return { type: types.DELETE_EVENT }
+export function deleteEvent ( response ) {
+  return { type: types.DELETE_EVENT, response }
 }

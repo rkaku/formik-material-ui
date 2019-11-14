@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
+import SendDialogButton from './../layouts/dialog/SendDialogButton'
 
 
 export default function Container () {
@@ -85,6 +86,12 @@ export default function Container () {
               fullWidth
               margin="normal"
               error={ ( touched.value && !values.value ) || errors.value }
+            />
+            <SendDialogButton
+              type="submit"
+              variant="outlined"
+              color="primary"
+              disabled={ !isValid || isSubmitting }
             />
             <Button
               type="submit"

@@ -38,7 +38,7 @@ export default function PositionedSnackbar ( { onClick } ) {
         ContentProps={ {
           'aria-describedby': 'message-id',
         } }
-        message={ <span id="message-id">Now Mining... Go Next :)</span> }
+        message={ <span id="message-id">Now Mining...</span> }
       />
     </div>
   );

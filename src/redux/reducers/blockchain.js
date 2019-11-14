@@ -4,7 +4,7 @@ import types from '../types/blockchain'
 function initialState () {
   return {
     wallet: {},
-    pool: {},
+    pool: [],
     chain: {}
   }
 }

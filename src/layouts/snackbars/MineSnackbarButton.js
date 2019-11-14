@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import Slide from '@material-ui/core/Slide'
+import MiningButton from './../buttons/MiningButton'
 
 
 function SlideTransition ( props ) {
@@ -26,11 +27,17 @@ export default function PositionedSnackbar ( { onClick } ) {
 
   return (
     <div>
-      <Button
+      <MiningButton
+        type="button"
+        onClick={ handleClick( SlideTransition ) }
+      />
+      {/* <Button
         type="button"
         variant="outlined"
         color="primary"
-        onClick={ handleClick( SlideTransition ) }>Mine</Button>
+        onClick={ handleClick( SlideTransition ) }>
+        Mine
+      </Button> */}
       <Snackbar
         open={ open }
         onClose={ handleClose }

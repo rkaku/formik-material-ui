@@ -87,6 +87,7 @@ export default function Container () {
               margin="normal"
               error={ ( touched.value && !values.value ) || errors.value }
             />
+            {/* :FIXME: Validation Error */}
             <SendDialogButton
               type="submit"
               variant="outlined"

@@ -70,10 +70,40 @@ export default function C () {
                   <ListItemIcon>
                     <ArrowDropDownIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Transactions: ${ chain.transactions }` } />
+                  <ListItemText primary={ `Transactions:` } />
                 </ListItem>
                 <Divider variant="middle" />
-                {/* <ListItem button>
+                {
+                  chain.transactions && chain.transactions.map( ( tran, index ) => {
+                    console.log( { tran } )
+                    return (
+                      <>
+                        <Paper key={ index } className={ classes.control }>
+                          <ListItem button>
+                            <ListItemIcon>
+                            </ListItemIcon>
+                            <ListItemText inset secondary={ `Recipient Address: ${ tran.recipient_address }` } />
+                          </ListItem>
+                          <Divider component="li" variant="inset" />
+                          <ListItem button>
+                            <ListItemIcon>
+                            </ListItemIcon>
+                            <ListItemText inset secondary={ `Sender Address: ${ tran.sender_address }` } />
+                          </ListItem>
+                          <Divider component="li" variant="inset" />
+                          <ListItem button>
+                            <ListItemIcon>
+                            </ListItemIcon>
+                            <ListItemText inset secondary={ `Amount: ${ tran.value }` } />
+                          </ListItem>
+                        </Paper>
+                      </>
+                    )
+                  } )
+                }
+                {/*
+                <Paper className={ classes.control }>
+                <ListItem button>
                   <ListItemIcon>
                   </ListItemIcon>
                   <ListItemText inset secondary="Sender Address" />
@@ -89,7 +119,9 @@ export default function C () {
                   <ListItemIcon>
                   </ListItemIcon>
                   <ListItemText inset secondary="Amount" />
-                </ListItem> */}
+                </ListItem>
+                </Paper>
+                 */}
                 <Divider />
               </List>
             </Paper>
@@ -107,17 +139,16 @@ export default function C () {
   const selector = ReactRedux.useSelector( state => state.events.chain )
   console.log( { selector } )
   console.log( selector )
-  if (selector !== undefined) {
-    console.log(selector[0])
+  if ( selector !== undefined ) {
+    console.log( selector[ 0 ] )
   }
   // const chains = selector[ 0 ]
-  // const aliceAmount = selector[ 1 ]
-  // const bobAmount = selector[ 2 ]
+  // const aliceAmount = selector[ 1 ] :TODO: Alice Amount
+  // const bobAmount = selector[ 2 ] :TODO: Bob Amount
   return (
     <>
       {
         selector && selector[ 0 ].map( ( chain, index ) => {
-        //   chains && chains.map( ( chain, index ) => {
           console.log( { chain } )
           return ( <Chain key={ index } chain={ chain } /> )
         } )

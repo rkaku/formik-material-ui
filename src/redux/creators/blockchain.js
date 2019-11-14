@@ -1,4 +1,4 @@
-import types from '../types/events'
+import types from '../types/blockchain'
 
 
 export function getWallet ( response ) {

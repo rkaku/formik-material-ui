@@ -1,12 +1,12 @@
-import axios from './../../api/axiosHeroku'
+import axios from '../../api/axiosHeroku'
 import {
-  getPool,
   getWallet,
   sendMoney,
+  getPool,
   getMine,
   getChain
-} from './../creators/events'
-import heroku from './../../api/heroku'
+} from '../creators/blockchain'
+import heroku from '../../api/heroku'
 
 
 export function asyncGetWallet () { // Wallet
@@ -17,16 +17,6 @@ export function asyncGetWallet () { // Wallet
     } )
     // console.log( { response } )
     dispatch( getWallet( response ) )
-  }
-}
-
-export function asyncGetPool () { // Pool
-  return async dispatch => {
-    const response = await axios( {
-      method: 'GET',
-      url: heroku.POOL
-    } )
-    dispatch( getPool( response ) )
   }
 }
 
@@ -43,6 +33,17 @@ export function asyncSendMoney ( values ) { // Send
     } )
     console.log( { values } )
     dispatch( sendMoney( values ) )
+  }
+}
+
+export function asyncGetPool () { // Pool
+  return async dispatch => {
+    const response = await axios( {
+      method: 'GET',
+      url: heroku.POOL
+    } )
+    console.log( response )
+    dispatch( getPool( response ) )
   }
 }
 

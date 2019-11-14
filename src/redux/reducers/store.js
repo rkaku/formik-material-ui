@@ -1,9 +1,9 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import events from './events'
+import blockchain from './blockchain'
 
 
-const rootReducer = combineReducers( { events } )
+const rootReducer = combineReducers( { blockchain } )
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ?

@@ -10,7 +10,7 @@ import {
 import {
   Button,
 } from '@material-ui/core';
-import * as Async from '../redux/async/events'
+import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
 
 
@@ -137,7 +137,7 @@ export default function Container () {
   }
 
   const dispatch = ReactRedux.useDispatch()
-  const selector = ReactRedux.useSelector( state => state.events.items )
+  const selector = ReactRedux.useSelector( state => state.blockchain.wallet )
   const _handleSubmit = React.useCallback( ( values ) => {
     dispatch( Async.asyncSendMoney( values ) )
   }, [ dispatch ] )

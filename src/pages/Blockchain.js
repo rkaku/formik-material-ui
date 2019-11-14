@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ReactRedux from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import * as Async from '../redux/async/events'
+import * as Async from '../redux/async/blockchain'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -97,7 +97,7 @@ export default function C () {
   React.useEffect( () => {
     dispatch( Async.asyncGetChain() )
   }, [ dispatch ] )
-  const selector = ReactRedux.useSelector( state => state.events.chain )
+  const selector = ReactRedux.useSelector( state => state.blockchain.chain )
   console.log( { selector } )
   console.log( selector )
   if ( selector !== undefined ) {
@@ -108,7 +108,7 @@ export default function C () {
   return (
     <>
       {
-        selector && selector[ 0 ].map( ( chain, index ) => {
+        selector[0] && selector[ 0 ].map( ( chain, index ) => {
           console.log( { chain } )
           return ( <Chain key={ index } chain={ chain } /> )
         } )

@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ReactRedux from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import * as Async from '../redux/async/events'
+import * as Async from '../redux/async/blockchain'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 export default function C () {
   function Pool ( { tran } ) {
     const classes = useStyles()
-    console.log( { tran } )
     return (
       <>
         <Grid container className={ classes.root } spacing={ 2 }>
@@ -61,7 +60,7 @@ export default function C () {
   React.useEffect( () => {
     dispatch( Async.asyncGetPool() )
   }, [ dispatch ] )
-  const selector = ReactRedux.useSelector( state => state.events.item )
+  const selector = ReactRedux.useSelector( state => state.blockchain.pool )
   console.log( selector )
   return (
     <>

@@ -19,7 +19,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.wrapper a {
+.wrapper .getting-started-button {
   position: absolute;
   top: 45%;
   left: 20%;
@@ -34,7 +34,7 @@
   text-decoration: none;
 }
 
-.wrapper a:hover{
+.wrapper .getting-started-button:hover{
   background: rgba(255, 255, 255, 0.3);
   }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import './Top.css'
 import logo from './../data/logo192.png'
 // import { ReactComponent as Logo } from './logo512.png'
-import MiningButton from './../layouts/buttons/MiningButton'
+import GettingStartedButton from './../layouts/buttons/GettingStartedButton.js'
 
 
 export default function Top () {
@@ -10,7 +10,11 @@ export default function Top () {
     <div className="wrapper">
       <img src={ logo } alt="Logo" />
       <p>Blockchain Playground</p>
-      <a href="#">Getting Started</a>
+      {/* <a href="#">Getting Started</a> */}
+      <GettingStartedButton
+        className="getting-started-button"
+        to={ '/wallet' }
+      />
     </div>
   )
 }

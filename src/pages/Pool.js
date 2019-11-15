@@ -12,7 +12,8 @@ import Grid from '@material-ui/core/Grid'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
 import Button from '@material-ui/core/Button'
-import MineSnackbarButton from '../layouts/snackbars/MineSnackbarButton'
+import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
+import MineCircleButton from '../layouts/buttons/MineCircleButton'
 
 
 export default function C () {
@@ -65,8 +66,12 @@ export default function C () {
   console.log( selector )
   return (
     <>
-      <MineSnackbarButton
-        onClick={ _handleOnClick } />
+      <MineCircleButton
+        onClick={ _handleOnClick }
+      />
+      {/* <MineSnackbarButton
+        onClick={ _handleOnClick }
+      /> */}
       <Button
         type="button"
         variant="outlined"

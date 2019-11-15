@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import Slide from '@material-ui/core/Slide'
-import MiningButton from './../buttons/MiningButton'
+import MineButton from './MineButton'
 
 
 function SlideTransition ( props ) {
@@ -27,7 +27,7 @@ export default function PositionedSnackbar ( { onClick } ) {
 
   return (
     <div>
-      <MiningButton
+      <MineButton
         type="button"
         onClick={ handleClick( SlideTransition ) }
       />

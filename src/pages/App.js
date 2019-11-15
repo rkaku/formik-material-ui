@@ -5,7 +5,7 @@ import { store } from './../redux/reducers/store'
 import Blockchain from './Blockchain'
 import Wallet from './Wallet'
 import Pool from './Pool'
-import Home from './Home'
+import Top from './Top'
 import NavTabs from './../layouts/header/NavTabs'
 
 
@@ -18,16 +18,16 @@ export default function C () {
           <Route path="/wallet" component={ Wallet } />
           <Route path="/pool" component={ Pool } />
           <Route path="/chain" component={ Blockchain } />
-          <Route path="/" component={ Home } />
+          <Route path="/" component={ Top } />
         </Switch>
       </>
     )
   }
   return (
     <Provider store={ store }>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   )
 }

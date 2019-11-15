@@ -1,15 +1,17 @@
 import React from 'react'
-// import './Home.css'
-// import logo from './logo512.png'
-// import styled from 'styled-components'
-// logo512.png
+import './Top.css'
+import logo from './../data/logo192.png'
+// import { ReactComponent as Logo } from './logo512.png'
+import MiningButton from './../layouts/buttons/MiningButton'
+
 
 export default function Top () {
   return (
-    <>
-      <h1>Hello, Blockchain!</h1>
-      {/* <img src={ logo } alt="Logo" /> */}
-    </>
+    <div className="wrapper">
+      <img src={ logo } alt="Logo" />
+      <p>Blockchain Playground</p>
+      <a href="#">Getting Started</a>
+    </div>
   )
 }
 // https://ruby-on-earth.firebaseapp.com

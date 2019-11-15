@@ -13,6 +13,7 @@ import {
 import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
 import SendDialogButton from './../layouts/dialog/SendDialogButton'
+import LinearQuery from './../layouts/form/LinearQuery'
 import Clipboard from "clipboard"
 
 export default function Container () {
@@ -67,6 +68,7 @@ export default function Container () {
               variant="outlined"
               margin="normal"
             />
+            <LinearQuery />
             <WalletTextField
               name="recipient_address"
               label="Address"
@@ -140,6 +142,7 @@ export default function Container () {
               variant="outlined"
               margin="normal"
             />
+            <LinearQuery />
             <Button
               data-clipboard-text={ bob.address }
               className="btn"
@@ -147,11 +150,11 @@ export default function Container () {
               variant="outlined"
               color="default"
               size="large"
-              // disabled={ !isValid || isSubmitting }
+            // disabled={ !isValid || isSubmitting }
             >
               Copy
             </Button>
-            {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */}
+            {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
           </Form>
         ) }
       </Formik>

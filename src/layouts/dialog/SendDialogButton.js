@@ -31,7 +31,7 @@ export default function DraggableDialog ( props ) {
     setOpen( false )
   };
   return (
-    <div>
+    <>
       <Button
         { ...props }
         // variant="outlined"
@@ -63,7 +63,7 @@ export default function DraggableDialog ( props ) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   )
 }
 

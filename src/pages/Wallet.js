@@ -13,7 +13,7 @@ import {
 import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
 import SendDialogButton from './../layouts/dialog/SendDialogButton'
-
+import Clipboard from "clipboard"
 
 export default function Container () {
   function Wallet () {
@@ -87,25 +87,27 @@ export default function Container () {
               margin="normal"
               error={ ( touched.value && !values.value ) || errors.value }
             />
-            {/* :FIXME: Validation Error */}
+            {/* :FIXME: Validation Error */ }
             <SendDialogButton
               type="submit"
               variant="outlined"
               color="primary"
+              size="large"
               disabled={ !isValid || isSubmitting }
             />
-            <Button
+            {/* <Button
               type="submit"
               variant="outlined"
               color="primary"
               disabled={ !isValid || isSubmitting }
             >
               Submit
-            </Button>
+            </Button> */}
             <Button
               type="button"
               variant="outlined"
               color="secondary"
+              size="large"
               component={ ReactRouter.Link }
               to="/"
             >
@@ -138,12 +140,25 @@ export default function Container () {
               variant="outlined"
               margin="normal"
             />
+            <Button
+              data-clipboard-text={ bob.address }
+              className="btn"
+              type="button"
+              variant="outlined"
+              color="default"
+              size="large"
+              // disabled={ !isValid || isSubmitting }
+            >
+              Copy
+            </Button>
+            {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */}
           </Form>
         ) }
       </Formik>
     )
   }
 
+  new Clipboard( '.btn' )
   const dispatch = ReactRedux.useDispatch()
   const selector = ReactRedux.useSelector( state => state.blockchain.wallet )
   const _handleSubmit = React.useCallback( ( values ) => {

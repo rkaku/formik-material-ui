@@ -1,8 +1,8 @@
 import React from 'react'
-import './Top.css'
+import './Home.css'
 import logo from './../data/logo192.png'
 // import { ReactComponent as Logo } from './logo512.png'
-import GettingStartedButton from './../layouts/buttons/GettingStartedButton.js'
+import GettingStartedButton from '../layouts/buttons/GettingStartedButton.js'
 
 
 export default function Top () {

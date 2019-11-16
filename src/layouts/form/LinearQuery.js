@@ -8,7 +8,13 @@ const ColorLinearProgress = withStyles( {
     backgroundColor: 'transparent',
   },
   barColorPrimary: {
+    // backgroundColor: '#ff8e53',
+    // backgroundColor: '#fe6b8b',
+    // backgroundColor: '#ff8c00',
+    // backgroundColor: '#8b0000',
     backgroundColor: '#09d3ac',
+
+
   },
 } )( LinearProgress );
 

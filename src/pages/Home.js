@@ -1,21 +1,23 @@
 import React from 'react'
 import './Home.css'
-import logo from './../data/logo192.png'
-// import { ReactComponent as Logo } from './logo512.png'
+import mars from './../data/mars.png'
+import martian from './../data/martian.png'
 import GettingStartedButton from '../layouts/buttons/GettingStartedButton.js'
 
 
-export default function Top () {
+export default function Home () {
+  // console.log( { Mars } )
   return (
     <div className="wrapper">
-      <img src={ logo } alt="Logo" />
+      <img id="background" src={ mars } alt="mars" />
+      <img className="fluffy" src={ martian } alt="Martian" />
       <p>Blockchain Playground</p>
-      {/* <a href="#">Getting Started</a> */}
-      <GettingStartedButton
-        className="getting-started-button"
-        to={ '/wallet' }
-      />
+      <div id="button-wrapper">
+        <GettingStartedButton
+          // className={ classes.button }
+          to={ '/wallet' }
+        />
+      </div>
     </div>
   )
 }
-// https://ruby-on-earth.firebaseapp.com

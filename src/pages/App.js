@@ -9,6 +9,7 @@ import Home from './Home'
 import NavTabs from './../layouts/header/NavTabs'
 import BottomNavigation from './../layouts/header/BotttomNavigation'
 import * as ReactRouter from 'react-router-dom'
+// import { SnackbarProvider } from 'notistack';
 
 
 export default function C () {
@@ -33,9 +34,11 @@ export default function C () {
   }
   return (
     <Provider store={ store }>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      {/* <SnackbarProvider maxSnack={ 3 }> */}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      {/* </SnackbarProvider> */}
     </Provider>
   )
 }

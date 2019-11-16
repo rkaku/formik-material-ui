@@ -20,8 +20,8 @@ export default function EmotionCSS ( props ) {
         { ...props }
         css={ css`
           position: absolute;
-          top: 42%;
-          left: 20%;
+          top: 80%;
+          left: 15%;
           -ms-transform: translate(-50%,-50%);
           -webkit-transform: translate(-50%,-50%);
           transform: translate(-50%,-50%);

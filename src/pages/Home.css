@@ -1,22 +1,29 @@
 .wrapper {
   position: relative;
+  /* background-color: darkred; */
+  background-color: #ff8e53;
+  min-height: 100vh;
 }
 
 .wrapper p {
   position: absolute;
   color: white;
   font-weight: bold;
-  font-size: 64px;
+  /* font-size: 64px; */
+  font-size: calc(10px + 10vmin);
   font-family: sans-serif;
+  width: 100%;
+  text-align: center;
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  display: block;
-  top: 14%;
+  /* display: block; */
+  top: 16%;
   left: 50%;
   margin: 0;
   padding: 0;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.69);
+  /* color: #ff8e53; */
 }
 
 /* #button-wrapper {

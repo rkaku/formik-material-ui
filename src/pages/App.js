@@ -10,6 +10,8 @@ import NavTabs from './../layouts/navigation/NavTabs'
 import BottomNavigation from './../layouts/navigation/BotttomNavigation'
 import * as ReactRouter from 'react-router-dom'
 import Navigation from './../layouts/navigation/Navigation'
+import Box from '@material-ui/core/Box'
+import Container from '@material-ui/core/Container'
 
 export default function C () {
   function App () {
@@ -22,12 +24,14 @@ export default function C () {
         {
           location.pathname !== "/" && <NavTabs />
         }
-        <Switch>
-          <Route path="/wallet" component={ Wallet } />
-          <Route path="/pool" component={ Pool } />
-          <Route path="/chain" component={ Blockchain } />
-          <Route path="/" component={ Home } />
-        </Switch>
+        <>
+          <Switch>
+            <Route path="/wallet" component={ Wallet } />
+            <Route path="/pool" component={ Pool } />
+            <Route path="/chain" component={ Blockchain } />
+            <Route path="/" component={ Home } />
+          </Switch>
+        </>
         {
           // location.pathname !== "/" && <BottomNavigation />
         }

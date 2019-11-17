@@ -19,9 +19,10 @@ export default function EmotionCSS ( props ) {
       <Fab
         { ...props }
         css={ css`
+          font-size: calc(10px + 1.4vmin);
           position: absolute;
           top: 80%;
-          left: 15%;
+          left: 17%;
           -ms-transform: translate(-50%,-50%);
           -webkit-transform: translate(-50%,-50%);
           transform: translate(-50%,-50%);
@@ -29,8 +30,8 @@ export default function EmotionCSS ( props ) {
           border-radius: 3px;
           border: 0;
           color: white;
-          height: 48px;
-          padding: 0 30px;
+          height: 55px;
+          padding: 0 14px;
           box-shadow: 0 3px 5px 2px rgba(255, 105, 135, 0.3);
           & .MuiButton-label {
             color: papayawhip;

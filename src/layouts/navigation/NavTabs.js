@@ -57,6 +57,7 @@ export default function NavTabs () {
           <LinkTab label="Wallet" href="/wallet" { ...a11yProps( 0 ) } />
           <LinkTab label="Transaction Pool" href="/pool" { ...a11yProps( 1 ) } />
           <LinkTab label="Blockchain" href="/chain" { ...a11yProps( 2 ) } />
+          <LinkTab label="Home" href="/" { ...a11yProps( 3 ) } />
         </Tabs>
       </Paper>
     </div>

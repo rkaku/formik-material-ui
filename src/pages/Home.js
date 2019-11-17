@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
-import mars from './../data/mars.png'
+import mars from './../data/mars.svg'
+// import mars from './../data/mars.png'
 import martian from './../data/martian.png'
 import GettingStartedButton from '../layouts/buttons/GettingStartedButton.js'
 

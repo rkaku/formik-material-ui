@@ -21,7 +21,7 @@ import Box from '@material-ui/core/Box'
 export default function Container () {
   function Wallet () {
     return (
-      <Box textAlign="center">
+      <Box mr={ 1 } ml={ 1 }>
         <Formik
           // enableReinitialize={ true } :TODO: ???
           initialValues={
@@ -46,7 +46,7 @@ export default function Container () {
             <Form>
               <WalletTextField
                 name="sender_priv_key"
-                label="Private Key"
+                label="Sender Private Key"
                 type="text"
                 placeholder="Private Key"
                 fullWidth
@@ -55,7 +55,7 @@ export default function Container () {
               />
               <WalletTextField
                 name="sender_pub_key"
-                label="Public Key"
+                label="Sender Public Key"
                 type="text"
                 placeholder="Public Key"
                 fullWidth
@@ -64,7 +64,7 @@ export default function Container () {
               />
               <WalletTextField
                 name="sender_address"
-                label="Address"
+                label="Sender Address"
                 type="text"
                 placeholder="Address"
                 fullWidth
@@ -72,12 +72,12 @@ export default function Container () {
                 margin="normal"
               />
               {
-                !selector && <LinearQuery />
+                !selector[ 0 ] && <LinearQuery />
               }
-              {/* <LinearQuery /> */}
+              {/* <LinearQuery /> */ }
               <WalletTextField
                 name="recipient_address"
-                label="Address"
+                label="Recipient Address"
                 type="text"
                 placeholder="Address"
                 required
@@ -96,13 +96,15 @@ export default function Container () {
                 error={ ( touched.value && !values.value ) || errors.value }
               />
               {/* :FIXME: Validation Error */ }
-              <SendDialogButton
-                type="submit"
-                // variant="outlined"
-                // color="primary"
-                size="large"
-                disabled={ !isValid || isSubmitting }
-              />
+              <Box textAlign="center">
+                <SendDialogButton
+                  type="submit"
+                  // variant="outlined"
+                  // color="primary"
+                  size="large"
+                  disabled={ !isValid || isSubmitting }
+                />
+              </Box>
               {/* <Button
               type="submit"
               variant="outlined"
@@ -123,7 +125,7 @@ export default function Container () {
             </Button> */}
               <WalletTextField
                 name="bob_priv_key"
-                label="Private Key"
+                label="Recipient Private Key"
                 type="text"
                 placeholder="Private Key"
                 fullWidth
@@ -132,7 +134,7 @@ export default function Container () {
               />
               <WalletTextField
                 name="bob_pub_key"
-                label="Public Key"
+                label="Recipient Public Key"
                 type="text"
                 placeholder="Public Key"
                 fullWidth
@@ -141,7 +143,7 @@ export default function Container () {
               />
               <WalletTextField
                 name="bob_address"
-                label="Address"
+                label="Recipient Address"
                 type="text"
                 placeholder="Address"
                 fullWidth
@@ -149,20 +151,21 @@ export default function Container () {
                 margin="normal"
               />
               {
-                !selector && <LinearQuery />
+                !selector[ 1 ] && <LinearQuery />
               }
-              {/* <LinearQuery /> */}
-              <Button
-                data-clipboard-text={ bob.address }
-                className="btn"
-                type="button"
-                variant="outlined"
-                color="default"
-                size="large"
-              // disabled={ !isValid || isSubmitting }
-              >
-                Copy
-            </Button>
+              <Box mt={ 1 }>
+                <Button
+                  data-clipboard-text={ bob.address }
+                  className="btn"
+                  type="button"
+                  variant="outlined"
+                  color="default"
+                  size="large"
+                // disabled={ !isValid || isSubmitting }
+                >
+                  Copy
+              </Button>
+              </Box>
               {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
             </Form>
           ) }

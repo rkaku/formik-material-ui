@@ -13,7 +13,7 @@ export default function Home () {
     <div className="wrapper">
       <Box m={0.1} pt={0.8} pr={0.2}>
         <img id="background" src={ mars } alt="mars" />
-        <img className="fluffy" src={ martian } alt="Martian" />
+        <img className="fluffy" src={ martian } alt="martian" />
         <p>Blockchain Playground</p>
         <div id="button-wrapper">
           <GettingStartedButton

@@ -8,8 +8,8 @@ export default function Navigation () {
   return (
     <div className="nav">
       <header className="nav-footer">
-        <ul className="ul-style">
-          <li className="li-style">
+        <ul className="ul-style-footer">
+          <li className="li-style-footer">
             <NavLink
               className="nav-link"
               to="/"

@@ -11,8 +11,8 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
-import Button from '@material-ui/core/Button'
-import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
+// import Button from '@material-ui/core/Button'
+// import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
 import MineCircleButton from '../layouts/buttons/MineCircleButton'
 
 
@@ -72,14 +72,14 @@ export default function C () {
       {/* <MineSnackbarButton
         onClick={ _handleOnClick }
       /> */}
-      <Button
+      {/* <Button
         type="button"
         variant="outlined"
         color="primary"
         onClick={ _handleOnClick }
       >
         Mine
-      </Button>
+      </Button> */}
       {
         selector && selector.map( ( tran, index ) => {
           console.log( { tran } )

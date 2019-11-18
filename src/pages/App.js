@@ -6,12 +6,13 @@ import Blockchain from './Blockchain'
 import Wallet from './Wallet'
 import Pool from './Pool'
 import Home from './Home'
-import NavTabs from './../layouts/navigation/NavTabs'
-import BottomNavigation from './../layouts/navigation/BotttomNavigation'
+// import NavTabs from './../layouts/navigation/NavTabs'
+// import BottomNavigation from './../layouts/navigation/BotttomNavigation'
 import * as ReactRouter from 'react-router-dom'
 import Navigation from './../layouts/navigation/Navigation'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
+import Footer from './../layouts/navigation/Footer'
+// import Box from '@material-ui/core/Box'
+// import Container from '@material-ui/core/Container'
 
 export default function C () {
   function App () {
@@ -19,10 +20,10 @@ export default function C () {
     return (
       <>
         {
-          // location.pathname !== "/" && <Navigation />
+          location.pathname !== "/" && <Navigation />
         }
         {
-          location.pathname !== "/" && <NavTabs />
+          // location.pathname !== "/" && <NavTabs />
         }
         <>
           <Switch>
@@ -36,7 +37,7 @@ export default function C () {
           // location.pathname !== "/" && <BottomNavigation />
         }
         {
-          location.pathname !== "/" && <Navigation />
+          location.pathname !== "/" && <Footer />
         }
       </>
     )

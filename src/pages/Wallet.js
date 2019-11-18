@@ -87,9 +87,9 @@ export default function Container () {
               />
               <WalletTextField
                 name="value"
-                label="Amount"
+                label="Amount (BTC)"
                 type="text"
-                placeholder="Amount"
+                placeholder="Amount (BTC)"
                 required
                 fullWidth
                 margin="normal"
@@ -102,7 +102,7 @@ export default function Container () {
                   // variant="outlined"
                   // color="primary"
                   size="large"
-                  disabled={ !isValid || isSubmitting }
+                  disabled={ !touched.value || !isValid || isSubmitting }
                 />
               </Box>
               {/* <Button
@@ -211,8 +211,8 @@ export default function Container () {
     bob_priv_key: bob.priv_key,
     bob_pub_key: bob.pub_key,
     bob_address: bob.address,
-    // recipient_address: '',
-    // value: '' :TODO: ???
+    recipient_address: "",
+    value: ""
   }
   return <Wallet />
 }

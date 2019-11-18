@@ -1,23 +1,24 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import { useField, useFormikContext } from 'formik';
+import { useField } from 'formik';
+// import { makeStyles } from '@material-ui/core/styles';
 
+
+// const useStyles = makeStyles( theme => ( {
+//   root: {
+//     marginBottom: theme.spacing( 0 ),
+//   },
+// } ) );
 
 export default function WalletTextField ( { ...props } ) {
   const [ field, meta ] = useField( props )
-  // const { setFieldValue } = useFormikContext()
-  // const _onChange = React.useCallback( ( event ) => {
-  //   setFieldValue(
-  //     field.name, event.target.value
-  //     // field.name, meta.initialValue ? meta.initialValue : event.target.value
-  //   )
-  // }, [ field.name, setFieldValue ] )
+  // const classes = useStyles();
   return (
-      <TextField
-        // onChange={ _onChange }
-        { ...field }
-        { ...props }
-      />
-      // { meta.error && meta.touched && <small>{ meta.error }</small> }
+    <TextField
+      // className={ classes.margin }
+      { ...field }
+      { ...props }
+    />
+    // { meta.error && meta.touched && <small>{ meta.error }</small> }
   )
 }

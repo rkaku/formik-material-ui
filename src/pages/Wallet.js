@@ -5,173 +5,183 @@ import * as Yup from 'yup'
 import {
   Formik,
   Form,
-  Field,
-  ErrorMessage
+  // ErrorMessage,
 } from 'formik'
 import {
-  TextField,
-  Switch,
-  Select,
-  fieldToTextField,
-  TextFieldProps,
-} from 'formik-material-ui'
-import {
   Button,
-  FormControl,
-  LinearProgress,
-  MenuItem,
-  InputLabel,
-  FormControlLabel,
-  // TextField
 } from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField'
-import { makeStyles } from '@material-ui/styles'
-import styled from 'styled-components'
-import * as Async from '../redux/async/events'
+import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
+import SendDialogButton from './../layouts/dialog/SendDialogButton'
+import LinearQuery from './../layouts/form/LinearQuery'
+import Clipboard from "clipboard"
+import Box from '@material-ui/core/Box'
 
 
 export default function Container () {
   function Wallet () {
     return (
-      <Formik
-        // enableReinitialize={ true }
-        initialValues={
-          initialValues
-        }
-        validationSchema={
-          Yup.object(
-            {
-              recipient_address: Yup.string().required( "Required" ),
-              value: Yup.number().positive().required( "Required" )
-            }
-          )
-        }
-        onSubmit={ ( values, { setSubmitting } ) => {
-          _handleSubmit( values )
-          setSubmitting( false )
-          // history.push( '/pool' )
-          // values.recipientAddress = ''
-          // values.value = ''
-        } }
-      >
-        { ( { isSubmitting, isValid, values, touched, errors } ) => (
-          <Form>
-            <WalletTextField
-              name="sender_priv_key"
-              label="Private Key"
-              type="text"
-              placeholder="Private Key"
-              // value={ values.alicePrivKey }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="sender_pub_key"
-              label="Public Key"
-              type="text"
-              placeholder="Public Key"
-              // value={ values.alicePubKey }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="sender_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              // value={ values.aliceAddress }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="recipient_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              // value={ values.recipientAddress }
-              required
-              fullWidth
-              // variant=""
-              margin="normal"
-              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
-            />
-            <WalletTextField
-              name="value"
-              label="Amount"
-              type="text"
-              placeholder="Amount"
-              // value={ values.value }
-              required
-              fullWidth
-              // variant=""
-              margin="normal"
-              error={ ( touched.value && !values.value ) || errors.value }
-            />
-            <Button
+      <Box mr={ 1 } ml={ 1 }>
+        <Formik
+          // enableReinitialize={ true } :TODO: ???
+          initialValues={
+            initialValues
+          }
+          validationSchema={
+            Yup.object(
+              {
+                recipient_address: Yup.string().required( "Required" ),
+                value: Yup.number().positive().required( "Required" )
+              }
+            )
+          }
+          onSubmit={ ( values, { setSubmitting } ) => {
+            _handleSubmit( values )
+            setSubmitting( false )
+            // values.recipientAddress = '' :TODO: Clear
+            // values.value = ''
+          } }
+        >
+          { ( { isSubmitting, isValid, values, touched, errors } ) => (
+            <Form>
+              <WalletTextField
+                name="sender_priv_key"
+                label="Sender Private Key"
+                type="text"
+                placeholder="Private Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="sender_pub_key"
+                label="Sender Public Key"
+                type="text"
+                placeholder="Public Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="sender_address"
+                label="Sender Address"
+                type="text"
+                placeholder="Address"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              {
+                !selector[ 0 ] && <LinearQuery />
+              }
+              {/* <LinearQuery /> */ }
+              <WalletTextField
+                name="recipient_address"
+                label="Recipient Address"
+                type="text"
+                placeholder="Address"
+                required
+                fullWidth
+                margin="normal"
+                error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
+              />
+              <WalletTextField
+                name="value"
+                label="Amount (BTC)"
+                type="text"
+                placeholder="Amount (BTC)"
+                required
+                fullWidth
+                margin="normal"
+                error={ ( touched.value && !values.value ) || errors.value }
+              />
+              {/* :FIXME: Validation Error */ }
+              <Box textAlign="center">
+                <SendDialogButton
+                  type="submit"
+                  // variant="outlined"
+                  // color="primary"
+                  size="large"
+                  disabled={ !touched.value || !isValid || isSubmitting }
+                />
+              </Box>
+              {/* <Button
               type="submit"
               variant="outlined"
               color="primary"
               disabled={ !isValid || isSubmitting }
             >
               Submit
-            </Button>
-            <Button
-              type="button"
-              variant="outlined"
-              color="secondary"
-              component={ ReactRouter.Link }
-              to="/"
-            >
-              Cancel
-            </Button>
-            <WalletTextField
-              name="bob_priv_key"
-              label="Private Key"
-              type="text"
-              placeholder="Private Key"
-              // value={ values.bobPrivKey }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="bob_pub_key"
-              label="Public Key"
-              type="text"
-              placeholder="Public Key"
-              // value={ values.bobPubKey }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="bob_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              // value={ values.bobAddress }
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-          </Form>
-        ) }
-      </Formik>
+            </Button> */}
+              {/* <Button
+                type="button"
+                variant="outlined"
+                color="secondary"
+                size="large"
+                component={ ReactRouter.Link }
+                to="/"
+              >
+                Cancel
+            </Button> */}
+              <WalletTextField
+                name="bob_priv_key"
+                label="Recipient Private Key"
+                type="text"
+                placeholder="Private Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="bob_pub_key"
+                label="Recipient Public Key"
+                type="text"
+                placeholder="Public Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="bob_address"
+                label="Recipient Address"
+                type="text"
+                placeholder="Address"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              {
+                !selector[ 1 ] && <LinearQuery />
+              }
+              <Box mt={ 1 }>
+                <Button
+                  data-clipboard-text={ bob.address }
+                  className="btn"
+                  type="button"
+                  variant="outlined"
+                  color="default"
+                  size="large"
+                // disabled={ !isValid || isSubmitting }
+                >
+                  Copy
+              </Button>
+              </Box>
+              {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
+            </Form>
+          ) }
+        </Formik>
+      </Box>
     )
   }
 
-  const history = ReactRouter.useHistory()
+  new Clipboard( '.btn' )
   const dispatch = ReactRedux.useDispatch()
-  const selector = ReactRedux.useSelector( state => state.events.items )
+  const selector = ReactRedux.useSelector( state => state.blockchain.wallet )
   const _handleSubmit = React.useCallback( ( values ) => {
-    dispatch( Async.asyncCreateEvent( values ) )
+    dispatch( Async.asyncSendMoney( values ) )
   }, [ dispatch ] )
   React.useEffect( () => {
-    dispatch( Async.asyncReadEvents() )
+    dispatch( Async.asyncGetWallet() )
   }, [ dispatch ] )
   console.log( { selector } )
   console.log( selector[ 0 ] )
@@ -201,8 +211,8 @@ export default function Container () {
     bob_priv_key: bob.priv_key,
     bob_pub_key: bob.pub_key,
     bob_address: bob.address,
-    // recipient_address: '',
-    // value: ''
+    recipient_address: "",
+    value: ""
   }
   return <Wallet />
 }

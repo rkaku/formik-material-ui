@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import './Top.css'
 import mars from './../data/mars.svg'
 // import mars from './../data/mars.png'
 import martian from './../data/martian.png'
@@ -11,10 +11,10 @@ export default function Home () {
   // console.log( { Mars } )
   return (
     <div className="wrapper">
-      <Box m={0.1} pt={0.8} pr={0.2}>
+      <Box mt={0.13} pt={0.8} pr={0.2}>
         <img id="background" src={ mars } alt="mars" />
         <img className="fluffy" src={ martian } alt="martian" />
-        <p>Blockchain Playground</p>
+        <h1>Blockchain Playground</h1>
         <div id="button-wrapper">
           <GettingStartedButton
             // className={ classes.button }

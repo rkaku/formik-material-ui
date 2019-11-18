@@ -13,6 +13,9 @@ import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import EnhancedEncryptionOutlinedIcon from '@material-ui/icons/EnhancedEncryptionOutlined';
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import Box from '@material-ui/core/Box'
+// import Container from '@material-ui/core/Container'
+
 
 
 export default function C () {
@@ -21,7 +24,7 @@ export default function C () {
     console.log( 'chain' )
     console.log( { chain } )
     return (
-      <>
+      <Box maxWidth="840px">
         <Grid container className={ classes.root } spacing={ 2 }>
           <Grid item xs={ 12 }>
             <Paper className={ classes.control }>
@@ -88,7 +91,7 @@ export default function C () {
             </Paper>
           </Grid>
         </Grid>
-      </>
+      </Box>
     )
   }
 
@@ -106,14 +109,14 @@ export default function C () {
   // const aliceAmount = selector[ 1 ] :TODO: Alice Amount
   // const bobAmount = selector[ 2 ] :TODO: Bob Amount
   return (
-    <>
+    <Box minHeight="80vh" maxWidth="960px" mx={ 33 }>
       {
-        selector[0] && selector[ 0 ].map( ( chain, index ) => {
+        selector[ 0 ] && selector[ 0 ].map( ( chain, index ) => {
           console.log( { chain } )
           return ( <Chain key={ index } chain={ chain } /> )
         } )
       }
-    </>
+    </Box>
   )
 }
 

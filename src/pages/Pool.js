@@ -14,13 +14,15 @@ import FormatBoldIcon from '@material-ui/icons/FormatBold'
 // import Button from '@material-ui/core/Button'
 // import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
 import MineCircleButton from '../layouts/buttons/MineCircleButton'
+import Box from '@material-ui/core/Box'
+// import Container from '@material-ui/core/Container'
 
 
 export default function C () {
   function Pool ( { tran } ) {
     const classes = useStyles()
     return (
-      <>
+      <Box mx={ 33 }>
         <Grid container className={ classes.root } spacing={ 2 }>
           <Grid item xs={ 12 }>
             <Paper className={ classes.control }>
@@ -51,7 +53,7 @@ export default function C () {
             </Paper>
           </Grid>
         </Grid>
-      </>
+      </Box>
     )
   }
 
@@ -65,10 +67,12 @@ export default function C () {
   const selector = ReactRedux.useSelector( state => state.blockchain.pool )
   console.log( selector )
   return (
-    <>
-      <MineCircleButton
-        onClick={ _handleOnClick }
-      />
+    <Box minHeight="80vh">
+      <Box mt={1}>
+        <MineCircleButton
+          onClick={ _handleOnClick }
+        />
+      </Box>
       {/* <MineSnackbarButton
         onClick={ _handleOnClick }
       /> */}
@@ -86,13 +90,13 @@ export default function C () {
           return ( <Pool key={ index } tran={ tran } /> )
         } )
       }
-    </>
+    </Box>
   )
 }
 
 const useStyles = makeStyles( theme => ( {
   root: {
-    width: '100%',
+    // width: '100%',
     maxWidth: 800,
     backgroundColor: theme.palette.background.paper,
   },

@@ -20,7 +20,7 @@ const useStyles = makeStyles( theme => ( {
   //   margin: theme.spacing( 2 ),
   // },
   placeholder: {
-    height: 100,
+    height: 14,
     margin: theme.spacing( 1 ),
   },
   fab: {

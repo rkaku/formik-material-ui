@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import SubmitButton from './../buttons/SubmitButton'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -32,14 +33,20 @@ export default function DraggableDialog ( props ) {
   };
   return (
     <>
-      <Button
+      <SubmitButton
+        { ...props }
+        onClick={ handleClickOpen }
+      >
+        {/* SEND BTC */}
+      </SubmitButton>
+      {/* <Button
         { ...props }
         // variant="outlined"
         // color="primary"
         onClick={ handleClickOpen }
       >
         SUBMIT
-      </Button>
+      </Button> */}
       <Dialog
         open={ open }
         onClose={ handleClose }

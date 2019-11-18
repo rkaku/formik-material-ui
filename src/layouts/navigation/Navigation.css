@@ -8,8 +8,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(14px + 1vmin);
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  color: white;
+}
+
+.nav-footer {
+  background-color: transparent;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  font-size: calc(14px + 1vmin);
+  /* font-weight: bold; */
   color: white;
 }
 
@@ -30,7 +44,7 @@
 }
 
 .li-style {
-  width: 345px;
+  width: 300px;
   list-style-type: none;
   /* border: 1px solid gray; */
   padding: 10px;

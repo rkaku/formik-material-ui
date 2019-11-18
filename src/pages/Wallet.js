@@ -15,89 +15,95 @@ import WalletTextField from './../layouts/form/WalletTextField'
 import SendDialogButton from './../layouts/dialog/SendDialogButton'
 import LinearQuery from './../layouts/form/LinearQuery'
 import Clipboard from "clipboard"
+import Box from '@material-ui/core/Box'
+
 
 export default function Container () {
   function Wallet () {
     return (
-      <Formik
-        // enableReinitialize={ true } :TODO: ???
-        initialValues={
-          initialValues
-        }
-        validationSchema={
-          Yup.object(
-            {
-              recipient_address: Yup.string().required( "Required" ),
-              value: Yup.number().positive().required( "Required" )
-            }
-          )
-        }
-        onSubmit={ ( values, { setSubmitting } ) => {
-          _handleSubmit( values )
-          setSubmitting( false )
-          // values.recipientAddress = '' :TODO: Clear
-          // values.value = ''
-        } }
-      >
-        { ( { isSubmitting, isValid, values, touched, errors } ) => (
-          <Form>
-            <WalletTextField
-              name="sender_priv_key"
-              label="Private Key"
-              type="text"
-              placeholder="Private Key"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="sender_pub_key"
-              label="Public Key"
-              type="text"
-              placeholder="Public Key"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="sender_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <LinearQuery />
-            <WalletTextField
-              name="recipient_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              required
-              fullWidth
-              margin="normal"
-              error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
-            />
-            <WalletTextField
-              name="value"
-              label="Amount"
-              type="text"
-              placeholder="Amount"
-              required
-              fullWidth
-              margin="normal"
-              error={ ( touched.value && !values.value ) || errors.value }
-            />
-            {/* :FIXME: Validation Error */ }
-            <SendDialogButton
-              type="submit"
-              variant="outlined"
-              color="primary"
-              size="large"
-              disabled={ !isValid || isSubmitting }
-            />
-            {/* <Button
+      <Box textAlign="center">
+        <Formik
+          // enableReinitialize={ true } :TODO: ???
+          initialValues={
+            initialValues
+          }
+          validationSchema={
+            Yup.object(
+              {
+                recipient_address: Yup.string().required( "Required" ),
+                value: Yup.number().positive().required( "Required" )
+              }
+            )
+          }
+          onSubmit={ ( values, { setSubmitting } ) => {
+            _handleSubmit( values )
+            setSubmitting( false )
+            // values.recipientAddress = '' :TODO: Clear
+            // values.value = ''
+          } }
+        >
+          { ( { isSubmitting, isValid, values, touched, errors } ) => (
+            <Form>
+              <WalletTextField
+                name="sender_priv_key"
+                label="Private Key"
+                type="text"
+                placeholder="Private Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="sender_pub_key"
+                label="Public Key"
+                type="text"
+                placeholder="Public Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="sender_address"
+                label="Address"
+                type="text"
+                placeholder="Address"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              {
+                !selector && <LinearQuery />
+              }
+              {/* <LinearQuery /> */}
+              <WalletTextField
+                name="recipient_address"
+                label="Address"
+                type="text"
+                placeholder="Address"
+                required
+                fullWidth
+                margin="normal"
+                error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
+              />
+              <WalletTextField
+                name="value"
+                label="Amount"
+                type="text"
+                placeholder="Amount"
+                required
+                fullWidth
+                margin="normal"
+                error={ ( touched.value && !values.value ) || errors.value }
+              />
+              {/* :FIXME: Validation Error */ }
+              <SendDialogButton
+                type="submit"
+                // variant="outlined"
+                // color="primary"
+                size="large"
+                disabled={ !isValid || isSubmitting }
+              />
+              {/* <Button
               type="submit"
               variant="outlined"
               color="primary"
@@ -105,59 +111,63 @@ export default function Container () {
             >
               Submit
             </Button> */}
-            <Button
-              type="button"
-              variant="outlined"
-              color="secondary"
-              size="large"
-              component={ ReactRouter.Link }
-              to="/"
-            >
-              Cancel
+              {/* <Button
+                type="button"
+                variant="outlined"
+                color="secondary"
+                size="large"
+                component={ ReactRouter.Link }
+                to="/"
+              >
+                Cancel
+            </Button> */}
+              <WalletTextField
+                name="bob_priv_key"
+                label="Private Key"
+                type="text"
+                placeholder="Private Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="bob_pub_key"
+                label="Public Key"
+                type="text"
+                placeholder="Public Key"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              <WalletTextField
+                name="bob_address"
+                label="Address"
+                type="text"
+                placeholder="Address"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+              {
+                !selector && <LinearQuery />
+              }
+              {/* <LinearQuery /> */}
+              <Button
+                data-clipboard-text={ bob.address }
+                className="btn"
+                type="button"
+                variant="outlined"
+                color="default"
+                size="large"
+              // disabled={ !isValid || isSubmitting }
+              >
+                Copy
             </Button>
-            <WalletTextField
-              name="bob_priv_key"
-              label="Private Key"
-              type="text"
-              placeholder="Private Key"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="bob_pub_key"
-              label="Public Key"
-              type="text"
-              placeholder="Public Key"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <WalletTextField
-              name="bob_address"
-              label="Address"
-              type="text"
-              placeholder="Address"
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-            <LinearQuery />
-            <Button
-              data-clipboard-text={ bob.address }
-              className="btn"
-              type="button"
-              variant="outlined"
-              color="default"
-              size="large"
-            // disabled={ !isValid || isSubmitting }
-            >
-              Copy
-            </Button>
-            {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
-          </Form>
-        ) }
-      </Formik>
+              {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
+            </Form>
+          ) }
+        </Formik>
+      </Box>
     )
   }
 

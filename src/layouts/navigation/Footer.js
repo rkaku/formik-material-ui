@@ -7,7 +7,7 @@ export default function Navigation () {
   const location = useLocation()
   return (
     <div className="nav">
-      <header className="nav-header">
+      <header className="nav-footer">
         <ul className="ul-style">
           <li className="li-style">
             <NavLink

@@ -22,7 +22,7 @@ export default function C () {
   function Pool ( { tran } ) {
     const classes = useStyles()
     return (
-      <Box mx={ 33 }>
+      <Box maxWidth="840px" ml="auto" mr="auto">
         <Grid container className={ classes.root } spacing={ 2 }>
           <Grid item xs={ 12 }>
             <Paper className={ classes.control }>
@@ -68,7 +68,7 @@ export default function C () {
   console.log( selector )
   return (
     <Box minHeight="80vh">
-      <Box mt={1}>
+      <Box m={ 2 }>
         <MineCircleButton
           onClick={ _handleOnClick }
         />
@@ -84,31 +84,41 @@ export default function C () {
       >
         Mine
       </Button> */}
-      {
-        selector && selector.map( ( tran, index ) => {
-          console.log( { tran } )
-          return ( <Pool key={ index } tran={ tran } /> )
-        } )
-      }
+        {
+          selector && selector.map( ( tran, index ) => {
+            console.log( { tran } )
+            return ( <Pool key={ index } tran={ tran } /> )
+          } )
+        }
     </Box>
   )
 }
 
 const useStyles = makeStyles( theme => ( {
   root: {
-    // width: '100%',
-    maxWidth: 800,
+    width: '100%',
+    maxWidth: 960,
     backgroundColor: theme.palette.background.paper,
   },
   paper: {
     height: 140,
-    width: 100,
+    width: 400,
   },
   control: {
     padding: theme.spacing( 2 ),
   },
 } ) );
 
+// const transactionStyle = {
+//   position: "absolute",
+//   width: "66.6%",
+//   top: "33.3%",
+//   left: "50%",
+//   // textAlign: "center",
+//   "-ms-transform": "translate( -50%, -50%)",
+//   "-webkit-transform": "translate( -50%, -50%)",
+//   transform: "translate( -50%, -50%)"
+// }
 
 // [
 //   {

@@ -1,5 +1,5 @@
 import React from 'react'
-import * as ReactRedux from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import * as Async from '../redux/async/blockchain'
 import List from '@material-ui/core/List';
@@ -14,15 +14,28 @@ import EnhancedEncryptionOutlinedIcon from '@material-ui/icons/EnhancedEncryptio
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Box from '@material-ui/core/Box'
-// import Container from '@material-ui/core/Container'
-
+import PropTypes from 'prop-types'
 
 
 export default function C () {
+
+  Chain.propTypes = {
+    chain: PropTypes.shape({
+      nonce: PropTypes.number.isRequired,
+      previous_hash: PropTypes.string.isRequired,
+      timestamp: PropTypes.string.isRequired,
+      transactions: PropTypes.arrayOf(
+        PropTypes.shape( {
+          recipient_address: PropTypes.string,
+          sender_address: PropTypes.string,
+          value: PropTypes.number
+        } )
+      ).isRequired
+    })
+  }
+
   function Chain ( { chain } ) {
     const classes = useStyles()
-    console.log( 'chain' )
-    console.log( { chain } )
     return (
       <Box maxWidth="840px" ml="auto" mr="auto">
         <Grid container className={ classes.root } spacing={ 2 }>
@@ -60,7 +73,6 @@ export default function C () {
                 <Divider variant="middle" />
                 {
                   chain.transactions && chain.transactions.map( ( tran, index ) => {
-                    console.log( { tran } )
                     return (
                       <>
                         <Paper key={ index } className={ classes.control }>
@@ -96,28 +108,28 @@ export default function C () {
   }
 
 
-  const dispatch = ReactRedux.useDispatch()
+  // Axios GET /chain => Blockchain Data
+  const dispatch = useDispatch()
   React.useEffect( () => {
     dispatch( Async.asyncGetChain() )
   }, [ dispatch ] )
-  const selector = ReactRedux.useSelector( state => state.blockchain.chain )
-  console.log( { selector } )
-  console.log( selector )
-  if ( selector !== undefined ) {
-    console.log( selector[ 0 ] )
-  }
-  // const aliceAmount = selector[ 1 ] :TODO: Alice Amount
-  // const bobAmount = selector[ 2 ] :TODO: Bob Amount
+  const selector = useSelector( state => state.blockchain.chain )
+
+  // :TODO: Alice & Bob Amount
+  // const aliceAmount = selector[ 1 ]
+  // const bobAmount = selector[ 2 ]
+
   return (
     <Box minHeight="80vh">
-      {/* <Box style={ chainStyle }> */}
-        {
-          selector[ 0 ] && selector[ 0 ].map( ( chain, index ) => {
-            console.log( { chain } )
-            return ( <Chain key={ index } chain={ chain } /> )
-          } )
-        }
-      {/* </Box> */}
+      {
+        // :TODO: Alice & Bob Amount Display
+      }
+      {
+        selector[ 0 ] && selector[ 0 ].map( ( chain, index ) => {
+          console.log( { chain } )
+          return ( <Chain key={ index } chain={ chain } /> )
+        } )
+      }
     </Box>
   )
 }
@@ -129,27 +141,10 @@ const useStyles = makeStyles( theme => ( {
     maxWidth: 960,
     backgroundColor: theme.palette.background.paper,
   },
-  paper: {
-    height: 140,
-    width: 400,
-  },
   control: {
     padding: theme.spacing( 2 ),
   },
 } ) );
-
-// const chainStyle = {
-//   marginLeft: "auto",
-//   marginRight: "auto",
-  // position: "absolute",
-  // width: "100%",
-  // top: "100%",
-  // left: "50%",
-  // textAlign: "center",
-  // "-ms-transform": "translate( -50%, -50%)",
-  // "-webkit-transform": "translate( -50%, -50%)",
-  // transform: "translate( -50%, -50%)"
-// }
 
 
 // [

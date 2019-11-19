@@ -19,16 +19,15 @@ import PropTypes from 'prop-types'
 export default function C () {
 
   Pool.propTypes = {
-    tran: PropTypes.shape( {
+    transaction: PropTypes.shape( {
       recipient_address: PropTypes.string.isRequired,
       sender_address: PropTypes.string.isRequired,
       value: PropTypes.number.isRequired
     } )
   }
 
-  function Pool ( { tran } ) {
+  function Pool ( { transaction } ) {
     const classes = useStyles()
-    console.log( { tran } )
     return (
       <Box maxWidth="840px" ml="auto" mr="auto">
         <Grid container className={ classes.root } spacing={ 2 }>
@@ -40,21 +39,21 @@ export default function C () {
                   <ListItemIcon>
                     <EmailOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Sender Address: ${ tran.sender_address }` } />
+                  <ListItemText primary={ `Sender Address: ${ transaction.sender_address }` } />
                 </ListItem>
                 <Divider variant="middle" />
                 <ListItem button>
                   <ListItemIcon>
                     <EmailOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Recipient Address: ${ tran.recipient_address }` } />
+                  <ListItemText primary={ `Recipient Address: ${ transaction.recipient_address }` } />
                 </ListItem>
                 <Divider variant="middle" />
                 <ListItem button>
                   <ListItemIcon>
                     <FormatBoldIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Amount: ${ tran.value } BTC` } />
+                  <ListItemText primary={ `Amount: ${ transaction.value } BTC` } />
                 </ListItem>
                 <Divider />
               </List>
@@ -85,8 +84,8 @@ export default function C () {
         />
       </Box>
       {
-        selector && selector.map( ( tran, index ) => {
-          return ( <Pool key={ index } tran={ tran } /> )
+        selector && selector.map( ( transaction, index ) => {
+          return ( <Pool key={ index } transaction={ transaction } /> )
         } )
       }
     </Box>
@@ -114,8 +113,8 @@ const useStyles = makeStyles( theme => ( {
 //   }
 // ]
 
-// { tran: { … } }
-// tran:
+// { transaction: { … } }
+// transaction:
 // recipient_address: "2d61Xrz2GnRbTj7zjXT7NodtgaZXvmAJPEX"
 // sender_address: "m68BpefzBQ3aZ1LMB6gMy569eoUai371y1"
 // value: 100

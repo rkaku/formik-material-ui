@@ -1,15 +1,8 @@
 import React from 'react'
-import * as ReactRedux from 'react-redux'
-import * as ReactRouter from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
-import {
-  Formik,
-  Form,
-  // ErrorMessage,
-} from 'formik'
-import {
-  Button,
-} from '@material-ui/core';
+import { Formik, Form } from 'formik'
+import Button from '@material-ui/core/Button';
 import * as Async from '../redux/async/blockchain'
 import WalletTextField from './../layouts/form/WalletTextField'
 import SendDialogButton from './../layouts/dialog/SendDialogButton'
@@ -18,28 +11,28 @@ import Clipboard from "clipboard"
 import Box from '@material-ui/core/Box'
 
 
-export default function Container () {
+export default function C () {
   function Wallet () {
     return (
-      <Box mr={ 1 } ml={ 1 }>
+      <Box ml={ 2 } mr={ 2 }>
         <Formik
-          // enableReinitialize={ true } :TODO: ???
           initialValues={
             initialValues
           }
           validationSchema={
-            Yup.object(
+            Yup.object().shape(
               {
-                recipient_address: Yup.string().required( "Required" ),
-                value: Yup.number().positive().required( "Required" )
+                recipient_address: Yup.string()
+                  .required("Recipient Address is a required field"),
+                value: Yup.number()
+                  .positive()
+                  .required("Amount is a required field")
               }
             )
           }
           onSubmit={ ( values, { setSubmitting } ) => {
             _handleSubmit( values )
             setSubmitting( false )
-            // values.recipientAddress = '' :TODO: Clear
-            // values.value = ''
           } }
         >
           { ( { isSubmitting, isValid, values, touched, errors } ) => (
@@ -74,7 +67,6 @@ export default function Container () {
               {
                 !selector[ 0 ] && <LinearQuery />
               }
-              {/* <LinearQuery /> */ }
               <WalletTextField
                 name="recipient_address"
                 label="Recipient Address"
@@ -83,7 +75,9 @@ export default function Container () {
                 required
                 fullWidth
                 margin="normal"
-                error={ ( touched.recipient_address && !values.recipient_address ) || errors.recipient_address }
+                error={
+                  touched.recipient_address && ( !values.recipient_address || errors.recipient_address )
+                }
               />
               <WalletTextField
                 name="value"
@@ -93,36 +87,15 @@ export default function Container () {
                 required
                 fullWidth
                 margin="normal"
-                error={ ( touched.value && !values.value ) || errors.value }
+                error={ touched.value && ( !values.value || errors.value ) }
               />
-              {/* :FIXME: Validation Error */ }
               <Box textAlign="center">
                 <SendDialogButton
                   type="submit"
-                  // variant="outlined"
-                  // color="primary"
                   size="large"
                   disabled={ !touched.value || !isValid || isSubmitting }
                 />
               </Box>
-              {/* <Button
-              type="submit"
-              variant="outlined"
-              color="primary"
-              disabled={ !isValid || isSubmitting }
-            >
-              Submit
-            </Button> */}
-              {/* <Button
-                type="button"
-                variant="outlined"
-                color="secondary"
-                size="large"
-                component={ ReactRouter.Link }
-                to="/"
-              >
-                Cancel
-            </Button> */}
               <WalletTextField
                 name="bob_priv_key"
                 label="Recipient Private Key"
@@ -160,13 +133,11 @@ export default function Container () {
                   type="button"
                   variant="outlined"
                   color="default"
-                  size="large"
-                // disabled={ !isValid || isSubmitting }
+                  size="medium"
                 >
-                  Copy
+                  ADDR COPY
               </Button>
               </Box>
-              {/* <button className="btn" data-clipboard-text={ bob.address }>COPY :)</button> */ }
             </Form>
           ) }
         </Formik>
@@ -174,18 +145,17 @@ export default function Container () {
     )
   }
 
+  // Clipboard.js => Address Copy
   new Clipboard( '.btn' )
-  const dispatch = ReactRedux.useDispatch()
-  const selector = ReactRedux.useSelector( state => state.blockchain.wallet )
-  const _handleSubmit = React.useCallback( ( values ) => {
-    dispatch( Async.asyncSendMoney( values ) )
-  }, [ dispatch ] )
+
+  // Axios GET /wallet => Wallet Data
+  const dispatch = useDispatch()
+  const selector = useSelector( state => state.blockchain.wallet )
   React.useEffect( () => {
     dispatch( Async.asyncGetWallet() )
   }, [ dispatch ] )
-  console.log( { selector } )
-  console.log( selector[ 0 ] )
-  console.log( typeof selector[ 0 ] )
+
+  // Wallet Data => State
   const [ alice, setAlice ] = React.useState( { priv_key: "", pub_key: "", address: "" } )
   const [ bob, setBob ] = React.useState( { priv_key: "", pub_key: "", address: "" } )
   React.useMemo( () => {
@@ -204,6 +174,8 @@ export default function Container () {
       address: bob.address
     } )
   }, [ selector ] )
+
+  // State => Form Initial Values
   const initialValues = {
     sender_priv_key: alice.priv_key,
     sender_pub_key: alice.pub_key,
@@ -214,5 +186,25 @@ export default function Container () {
     recipient_address: "",
     value: ""
   }
+
+  // Submit Form Data
+  const _handleSubmit = React.useCallback( ( values ) => {
+    dispatch( Async.asyncSendMoney( values ) )
+  }, [ dispatch ] )
+
   return <Wallet />
 }
+
+
+// { selector: Array( 2 ) }
+// selector: Array( 2 )
+// 0:
+// address: "VAJfKcgCfmtFTeK7o3nURWQk18t3RoibSf"
+// priv_key: "Lzhp9LopCHc5baafRVrffRsdjvHq89ZZKYAftuU4DtouF7T9sYjAJrBnVf7ZskfpGrHNQCd2KFyUsLJEtNoGgNGPJyaWt45aaAESN5DhmdGRCX2s3FzuUauumkiHANkL8TWXmeR1i4g5qwhA4LEDJGdxxS8t5A49z"
+// pub_key: "PZ8Tyr4Nx8MHsRAGMpZmZ6TWY63dXWSCyDaiKS5fSGUQS8Eh8kFP4mZWBoEcA83BFo3j6v44irm5T2ttgV65UmRTnGxnjzbTQsh4MMWSpdYvWeunNYKe9HJL"
+// __proto__: Object
+// 1:
+// address: "gYQJW2D2RhiCvDUsVQioTXLDEAkqwccu9R"
+// priv_key: "Lzhp9LopCCVE7eG3FtcDW1oSzKWmo1tG46vgdmsC5eKd1XGF3Rjxi1bUfnoZTi512YR2FW2Af28SFbjhWGGa3ErrLd78PNdVqvmSKttVvLXGFYqMJSLhABhEjdzvuEBNPo93Dxnxsi3z8Ga3ZkrTi9GDiWrTP1Xy9"
+// pub_key: "PZ8Tyr4Nx8MHsRAGMpZmZ6TWY63dXWSCxxJyh5TWLNMppcDDRYLwL9ekisD9NP6dqxYE9WEfYGoPxwL35UGQWrCmT6FzaTBFAC285NhbdtTEy3GiD4oLdY3q"
+// __proto__: Object

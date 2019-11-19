@@ -1,5 +1,5 @@
 import React from 'react'
-import * as ReactRedux from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import * as Async from '../redux/async/blockchain'
 import List from '@material-ui/core/List'
@@ -11,16 +11,24 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
-// import Button from '@material-ui/core/Button'
-// import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
 import MineCircleButton from '../layouts/buttons/MineCircleButton'
 import Box from '@material-ui/core/Box'
-// import Container from '@material-ui/core/Container'
+import PropTypes from 'prop-types'
 
 
 export default function C () {
+
+  Pool.propTypes = {
+    tran: PropTypes.shape( {
+      recipient_address: PropTypes.string.isRequired,
+      sender_address: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired
+    } )
+  }
+
   function Pool ( { tran } ) {
     const classes = useStyles()
+    console.log( { tran } )
     return (
       <Box maxWidth="840px" ml="auto" mr="auto">
         <Grid container className={ classes.root } spacing={ 2 }>
@@ -57,15 +65,18 @@ export default function C () {
     )
   }
 
-  const dispatch = ReactRedux.useDispatch()
-  const _handleOnClick = React.useCallback( () => {
-    dispatch( Async.asyncGetMine() )
-  }, [ dispatch ] )
+  // Axios GET /pool => Transaction Pool Data
+  const dispatch = useDispatch()
   React.useEffect( () => {
     dispatch( Async.asyncGetPool() )
   }, [ dispatch ] )
-  const selector = ReactRedux.useSelector( state => state.blockchain.pool )
-  console.log( selector )
+  const selector = useSelector( state => state.blockchain.pool )
+
+  // Axios GET /mine => Mining
+  const _handleOnClick = React.useCallback( () => {
+    dispatch( Async.asyncGetMine() )
+  }, [ dispatch ] )
+
   return (
     <Box minHeight="80vh">
       <Box m={ 2 }>
@@ -73,26 +84,15 @@ export default function C () {
           onClick={ _handleOnClick }
         />
       </Box>
-      {/* <MineSnackbarButton
-        onClick={ _handleOnClick }
-      /> */}
-      {/* <Button
-        type="button"
-        variant="outlined"
-        color="primary"
-        onClick={ _handleOnClick }
-      >
-        Mine
-      </Button> */}
-        {
-          selector && selector.map( ( tran, index ) => {
-            console.log( { tran } )
-            return ( <Pool key={ index } tran={ tran } /> )
-          } )
-        }
+      {
+        selector && selector.map( ( tran, index ) => {
+          return ( <Pool key={ index } tran={ tran } /> )
+        } )
+      }
     </Box>
   )
 }
+
 
 const useStyles = makeStyles( theme => ( {
   root: {
@@ -100,25 +100,11 @@ const useStyles = makeStyles( theme => ( {
     maxWidth: 960,
     backgroundColor: theme.palette.background.paper,
   },
-  paper: {
-    height: 140,
-    width: 400,
-  },
   control: {
     padding: theme.spacing( 2 ),
   },
 } ) );
 
-// const transactionStyle = {
-//   position: "absolute",
-//   width: "66.6%",
-//   top: "33.3%",
-//   left: "50%",
-//   // textAlign: "center",
-//   "-ms-transform": "translate( -50%, -50%)",
-//   "-webkit-transform": "translate( -50%, -50%)",
-//   transform: "translate( -50%, -50%)"
-// }
 
 // [
 //   {
@@ -127,3 +113,10 @@ const useStyles = makeStyles( theme => ( {
 //     "value": 100
 //   }
 // ]
+
+// { tran: { … } }
+// tran:
+// recipient_address: "2d61Xrz2GnRbTj7zjXT7NodtgaZXvmAJPEX"
+// sender_address: "m68BpefzBQ3aZ1LMB6gMy569eoUai371y1"
+// value: 100
+// __proto__: Object

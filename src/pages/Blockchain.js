@@ -126,7 +126,6 @@ export default function C () {
       }
       {
         selector[ 0 ] && selector[ 0 ].map( ( chain, index ) => {
-          console.log( { chain } )
           return ( <Chain key={ index } chain={ chain } /> )
         } )
       }

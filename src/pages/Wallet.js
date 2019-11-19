@@ -23,10 +23,10 @@ export default function C () {
             Yup.object().shape(
               {
                 recipient_address: Yup.string()
-                  .required("Recipient Address is a required field"),
+                  .required( "Recipient Address is a required field" ),
                 value: Yup.number()
                   .positive()
-                  .required("Amount is a required field")
+                  .required( "Amount is a required field" )
               }
             )
           }
@@ -35,7 +35,7 @@ export default function C () {
             setSubmitting( false )
           } }
         >
-          { ( { isSubmitting, isValid, values, touched, errors } ) => (
+          { ( { isSubmitting, isValid, values, touched, errors, handleSubmit } ) => (
             <Form>
               <WalletTextField
                 name="sender_priv_key"
@@ -91,9 +91,10 @@ export default function C () {
               />
               <Box textAlign="center">
                 <SendDialogButton
-                  type="submit"
+                  type="button"
                   size="large"
                   disabled={ !touched.value || !isValid || isSubmitting }
+                  handleSubmit={ handleSubmit }
                 />
               </Box>
               <WalletTextField

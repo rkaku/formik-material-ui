@@ -4,13 +4,16 @@ import { jsx, css } from '@emotion/core'
 import Fab from '@material-ui/core/Fab'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 
-const useStyles = makeStyles( theme => ( {
-  margin: {
-    margin: theme.spacing( 1 ),
-  },
-} ) );
+// { props: { … } }
+// props: to: "/wallet"
+EmotionCSS.propTypes = {
+  props: PropTypes.shape( {
+    to: PropTypes.string.isRequired
+  } )
+}
 
 export default function EmotionCSS ( props ) {
   const classes = useStyles();
@@ -47,5 +50,12 @@ export default function EmotionCSS ( props ) {
         Getting Started
         </Fab>
     </React.Fragment>
-  );
+  )
 }
+
+
+const useStyles = makeStyles( theme => ( {
+  margin: {
+    margin: theme.spacing( 1 ),
+  },
+} ) )

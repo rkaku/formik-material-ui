@@ -1,5 +1,5 @@
 import React from 'react'
-import * as ReactRedux from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import * as Async from '../redux/async/blockchain'
 import List from '@material-ui/core/List'
@@ -11,18 +11,25 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
-// import Button from '@material-ui/core/Button'
-// import MineSnackbarButton from '../layouts/buttons/MineSnackbarButton'
 import MineCircleButton from '../layouts/buttons/MineCircleButton'
 import Box from '@material-ui/core/Box'
-// import Container from '@material-ui/core/Container'
+import PropTypes from 'prop-types'
 
 
 export default function C () {
-  function Pool ( { tran } ) {
+
+  Pool.propTypes = {
+    transaction: PropTypes.shape( {
+      recipient_address: PropTypes.string.isRequired,
+      sender_address: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired
+    } )
+  }
+
+  function Pool ( { transaction } ) {
     const classes = useStyles()
     return (
-      <Box mx={ 33 }>
+      <Box maxWidth="840px" ml="auto" mr="auto">
         <Grid container className={ classes.root } spacing={ 2 }>
           <Grid item xs={ 12 }>
             <Paper className={ classes.control }>
@@ -32,21 +39,21 @@ export default function C () {
                   <ListItemIcon>
                     <EmailOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Sender Address: ${ tran.sender_address }` } />
+                  <ListItemText primary={ `Sender Address: ${ transaction.sender_address }` } />
                 </ListItem>
                 <Divider variant="middle" />
                 <ListItem button>
                   <ListItemIcon>
                     <EmailOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Recipient Address: ${ tran.recipient_address }` } />
+                  <ListItemText primary={ `Recipient Address: ${ transaction.recipient_address }` } />
                 </ListItem>
                 <Divider variant="middle" />
                 <ListItem button>
                   <ListItemIcon>
                     <FormatBoldIcon />
                   </ListItemIcon>
-                  <ListItemText primary={ `Amount: ${ tran.value } BTC` } />
+                  <ListItemText primary={ `Amount: ${ transaction.value } BTC` } />
                 </ListItem>
                 <Divider />
               </List>
@@ -57,52 +64,40 @@ export default function C () {
     )
   }
 
-  const dispatch = ReactRedux.useDispatch()
-  const _handleOnClick = React.useCallback( () => {
-    dispatch( Async.asyncGetMine() )
-  }, [ dispatch ] )
+  // Axios GET /pool => Transaction Pool Data
+  const dispatch = useDispatch()
   React.useEffect( () => {
     dispatch( Async.asyncGetPool() )
   }, [ dispatch ] )
-  const selector = ReactRedux.useSelector( state => state.blockchain.pool )
-  console.log( selector )
+  const selector = useSelector( state => state.blockchain.pool )
+
+  // Axios GET /mine => Mining
+  const _handleOnClick = React.useCallback( () => {
+    dispatch( Async.asyncGetMine() )
+  }, [ dispatch ] )
+
   return (
     <Box minHeight="80vh">
-      <Box mt={1}>
+      <Box m={ 2 }>
         <MineCircleButton
           onClick={ _handleOnClick }
         />
       </Box>
-      {/* <MineSnackbarButton
-        onClick={ _handleOnClick }
-      /> */}
-      {/* <Button
-        type="button"
-        variant="outlined"
-        color="primary"
-        onClick={ _handleOnClick }
-      >
-        Mine
-      </Button> */}
       {
-        selector && selector.map( ( tran, index ) => {
-          console.log( { tran } )
-          return ( <Pool key={ index } tran={ tran } /> )
+        selector && selector.map( ( transaction, index ) => {
+          return ( <Pool key={ index } transaction={ transaction } /> )
         } )
       }
     </Box>
   )
 }
 
+
 const useStyles = makeStyles( theme => ( {
   root: {
-    // width: '100%',
-    maxWidth: 800,
+    width: '100%',
+    maxWidth: 960,
     backgroundColor: theme.palette.background.paper,
-  },
-  paper: {
-    height: 140,
-    width: 100,
   },
   control: {
     padding: theme.spacing( 2 ),
@@ -117,3 +112,10 @@ const useStyles = makeStyles( theme => ( {
 //     "value": 100
 //   }
 // ]
+
+// { transaction: { … } }
+// transaction:
+// recipient_address: "2d61Xrz2GnRbTj7zjXT7NodtgaZXvmAJPEX"
+// sender_address: "m68BpefzBQ3aZ1LMB6gMy569eoUai371y1"
+// value: 100
+// __proto__: Object

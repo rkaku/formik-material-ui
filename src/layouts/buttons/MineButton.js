@@ -1,7 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import Fade from '@material-ui/core/Fade'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import PetsOutlinedIcon from '@material-ui/icons/PetsOutlined'
 import PropTypes from 'prop-types'
@@ -18,18 +17,37 @@ DelayingAppearance.propTypes = {
 }
 
 export default function DelayingAppearance ( props ) {
-  const classes = useStyles();
-  const [ query, setQuery ] = React.useState( 'idle' );
-  const timerRef = React.useRef();
+
+  const classes = useStyles()
+  const [ query, setQuery ] = React.useState( 'idle' )
+  const timerRef = React.useRef()
+  const selector = useSelector( state => state.blockchain.mining )
 
   React.useEffect(
     () => () => {
-      clearTimeout( timerRef.current );
+      clearTimeout( timerRef.current )
     },
     [],
   )
 
-  // On Click => Circular Progress
+  const [ isSuccess, setIsSuccess ] = React.useState()
+  React.useMemo( () => {
+    if ( selector === undefined ) return
+    setIsSuccess( selector )
+  }, [ selector ] )
+
+  // Display Mining Results
+  const handleSuccess = React.useCallback( () => {
+    if ( isSuccess === true ) {
+      return ( <Typography>SUCCESS ：）</Typography> )
+    }
+    if ( isSuccess === false ) {
+      return ( <Typography>FAILED ：（</Typography> )
+    }
+    return null
+  }, [ isSuccess ] )
+
+  // On Click => Handle Button Label
   const handleClickQuery = () => {
     props.onClick()
     clearTimeout( timerRef.current )
@@ -38,17 +56,19 @@ export default function DelayingAppearance ( props ) {
       setQuery( 'idle' )
       return
     }
-
+    // Button Label => Now Mining...
     setQuery( 'progress' )
+
+    // Button Label Reset => Start Mining
     timerRef.current = setTimeout( () => {
-      setQuery( 'success' )
-    }, 6789 )
-  };
+      setQuery( 'idle' )
+    }, 1234 )
+  }
 
   return (
     <div className={ classes.root }>
+      {/* Mine Button */ }
       <Fab
-        // { ...props }
         variant="extended"
         aria-label="mine"
         className={ classes.fab }
@@ -58,21 +78,11 @@ export default function DelayingAppearance ( props ) {
         { query !== 'idle' ? 'Now Mining...' : 'Start Mining' }
       </Fab>
 
-      {/* Circular Progress */ }
+      {/* Mining Results */ }
       <div className={ classes.placeholder }>
-        { query === 'success' ? (
-          <Typography>SUCCESS ：）</Typography>
-        ) : (
-            <Fade
-              in={ query === 'progress' }
-              style={ {
-                transitionDelay: query === 'progress' ? '1111ms' : '0ms',
-              } }
-              unmountOnExit
-            >
-              <CircularProgress />
-            </Fade>
-          ) }
+        {
+          handleSuccess()
+        }
       </div>
     </div>
   )

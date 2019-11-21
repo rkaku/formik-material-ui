@@ -14,8 +14,8 @@ export function sendMoney ( values ) {
   return { type: types.POST_SEND_MONEY, values }
 }
 
-export function getMine () {
-  return { type: types.GET_MINE }
+export function getMine ( response ) {
+  return { type: types.GET_MINE, response }
 }
 
 export function getChain ( response ) {

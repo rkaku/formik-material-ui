@@ -5,6 +5,7 @@ function initialState () {
   return {
     wallet: {},
     pool: [],
+    mining: {},
     chain: {}
   }
 }
@@ -19,7 +20,7 @@ export default function ( state = initialState(), action ) {
     case types.GET_POOL:
       return { ...state, pool: action.response.data }
     case types.GET_MINE:
-      return state // :FIXME: {...state, pool: undefined}
+      return { ...state, mining: action.response.data }
     case types.GET_CHAIN:
       return { ...state, chain: action.response.data }
     default:

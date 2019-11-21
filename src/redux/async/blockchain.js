@@ -1,69 +1,63 @@
 import axios from '../../api/axiosHeroku'
-import {
-  getWallet,
-  sendMoney,
-  getPool,
-  getMine,
-  getChain
-} from '../creators/blockchain'
+import * as Creators from '../creators/blockchain'
 import heroku from '../../api/heroku'
+// import {
+//   getWallet,
+//   sendMoney,
+//   getPool,
+//   getMine,
+//   getChain
+// } from '../creators/blockchain'
 
 
-export function asyncGetWallet () { // Wallet
+export function asyncGetWallet () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.WALLET
     } )
-    // console.log( { response } )
-    dispatch( getWallet( response ) )
+    dispatch( Creators.getWallet( response ) )
   }
 }
 
-export function asyncSendMoney ( values ) { // Send
+export function asyncSendMoney ( values ) {
   return async dispatch => {
     console.log( { values } )
     await axios( {
       method: 'POST',
       url: heroku.SEND,
-      // headers: {
-      //   "contentType": "application/json"
-      // },
       data: values
     } )
-    console.log( { values } )
-    dispatch( sendMoney( values ) )
+    dispatch( Creators.sendMoney( values ) )
   }
 }
 
-export function asyncGetPool () { // Pool
+export function asyncGetPool () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.POOL
     } )
-    console.log( response )
-    dispatch( getPool( response ) )
+    dispatch( Creators.getPool( response ) )
   }
 }
 
-export function asyncGetMine () { // Mine
+export function asyncGetMine () {
   return async dispatch => {
-    await axios( {
+    const response = await axios( {
       method: 'GET',
       url: heroku.MINE
     } )
-    dispatch( getMine() )
+    dispatch( Creators.getMine( response ) )
   }
 }
 
-export function asyncGetChain () { // Chain
+export function asyncGetChain () {
   return async dispatch => {
     const response = await axios( {
       method: 'GET',
       url: heroku.CHAIN
     } )
-    console.log( { response } )
-    dispatch( getChain( response ) )
+    dispatch( Creators.getChain( response ) )
   }
 }

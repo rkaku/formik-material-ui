@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined'
 import FormatBoldIcon from '@material-ui/icons/FormatBold'
-import MineCircleButton from '../layouts/buttons/MineCircleButton'
+import MineButton from '../layouts/buttons/MineButton'
 import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
 
@@ -79,7 +79,7 @@ export default function C () {
   return (
     <Box minHeight="80vh">
       <Box m={ 2 }>
-        <MineCircleButton
+        <MineButton
           onClick={ _handleOnClick }
         />
       </Box>

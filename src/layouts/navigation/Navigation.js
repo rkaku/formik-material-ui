@@ -8,16 +8,6 @@ export default function Navigation () {
     <div className="nav">
       <header className="nav-header">
         <ul className="ul-style">
-          {/* <li className="li-style">
-            <NavLink
-              className="nav-link"
-              to="/"
-              exact
-              activeClassName="active-link"
-            >
-              TOP
-            </NavLink>
-          </li> */}
           <li className="li-style">
             <NavLink
               className="nav-link"

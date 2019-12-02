@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Button from "@material-ui/core/Button";
-// import * as Async from "../redux/async/blockchain";
 import * as Actions from "actionCreators";
 import WalletTextField from "layouts/form/WalletTextField";
 import SendDialogButton from "layouts/dialog/SendDialogButton";
@@ -11,140 +10,7 @@ import LinearQuery from "layouts/form/LinearQuery";
 import Clipboard from "clipboard";
 import Box from "@material-ui/core/Box";
 
-export default function C() {
-  function Wallet() {
-    return (
-      <Box ml={2} mr={2}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={Yup.object().shape({
-            recipient_address: Yup.string().required(
-              "Recipient Address is a required field",
-            ),
-            value: Yup.number()
-              .positive()
-              .required("Amount is a required field"),
-          })}
-          onSubmit={(values, { setSubmitting }) => {
-            _handleSubmit(values);
-            setSubmitting(false);
-          }}
-        >
-          {({
-            isSubmitting,
-            isValid,
-            values,
-            touched,
-            errors,
-            handleSubmit,
-          }) => (
-            <Form>
-              <WalletTextField
-                name='sender_priv_key'
-                label='Sender Private Key'
-                type='text'
-                placeholder='Private Key'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              <WalletTextField
-                name='sender_pub_key'
-                label='Sender Public Key'
-                type='text'
-                placeholder='Public Key'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              <WalletTextField
-                name='sender_address'
-                label='Sender Address'
-                type='text'
-                placeholder='Address'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              {!selector[0] && <LinearQuery />}
-              <WalletTextField
-                name='recipient_address'
-                label='Recipient Address'
-                type='text'
-                placeholder='Address'
-                required
-                fullWidth
-                margin='normal'
-                error={
-                  touched.recipient_address &&
-                  (!values.recipient_address || errors.recipient_address)
-                }
-              />
-              <WalletTextField
-                name='value'
-                label='Amount (BTC)'
-                type='text'
-                placeholder='Amount (BTC)'
-                required
-                fullWidth
-                margin='normal'
-                error={touched.value && (!values.value || errors.value)}
-              />
-              <Box textAlign='center'>
-                <SendDialogButton
-                  type='button'
-                  size='large'
-                  disabled={!touched.value || !isValid || isSubmitting}
-                  handleSubmit={handleSubmit}
-                />
-              </Box>
-              <WalletTextField
-                name='bob_priv_key'
-                label='Recipient Private Key'
-                type='text'
-                placeholder='Private Key'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              <WalletTextField
-                name='bob_pub_key'
-                label='Recipient Public Key'
-                type='text'
-                placeholder='Public Key'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              <WalletTextField
-                name='bob_address'
-                label='Recipient Address'
-                type='text'
-                placeholder='Address'
-                fullWidth
-                variant='outlined'
-                margin='normal'
-              />
-              {!selector[1] && <LinearQuery />}
-              <Box mt={1}>
-                <Button
-                  data-clipboard-text={bob.address}
-                  className='btn'
-                  type='button'
-                  variant='outlined'
-                  color='default'
-                  size='medium'
-                >
-                  ADDR COPY
-                </Button>
-              </Box>
-            </Form>
-          )}
-        </Formik>
-      </Box>
-    );
-  }
-
+export default () => {
   // Clipboard.js => Address Copy
   new Clipboard(".btn");
 
@@ -194,6 +60,7 @@ export default function C() {
     recipient_address: "",
     value: "",
   };
+  console.log({ initialValues });
 
   // Submit Form Data
   const _handleSubmit = React.useCallback(
@@ -203,8 +70,131 @@ export default function C() {
     [dispatch],
   );
 
-  return <Wallet />;
-}
+  return (
+    <Box ml={2} mr={2}>
+      <Formik
+        enableReinitialize={true}
+        initialValues={initialValues}
+        validationSchema={Yup.object().shape({
+          recipient_address: Yup.string().required(
+            "Recipient Address is a required field",
+          ),
+          value: Yup.number()
+            .positive()
+            .required("Amount is a required field"),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          _handleSubmit(values);
+          setSubmitting(false);
+        }}
+      >
+        {({ isSubmitting, isValid, values, touched, errors, handleSubmit }) => (
+          <Form>
+            <WalletTextField
+              name='sender_priv_key'
+              label='Sender Private Key'
+              type='text'
+              placeholder='Private Key'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            <WalletTextField
+              name='sender_pub_key'
+              label='Sender Public Key'
+              type='text'
+              placeholder='Public Key'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            <WalletTextField
+              name='sender_address'
+              label='Sender Address'
+              type='text'
+              placeholder='Address'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            {!selector[0] && <LinearQuery />}
+            <WalletTextField
+              name='recipient_address'
+              label='Recipient Address'
+              type='text'
+              placeholder='Address'
+              required
+              fullWidth
+              margin='normal'
+              error={
+                touched.recipient_address &&
+                (!values.recipient_address || errors.recipient_address)
+              }
+            />
+            <WalletTextField
+              name='value'
+              label='Amount (BTC)'
+              type='text'
+              placeholder='Amount (BTC)'
+              required
+              fullWidth
+              margin='normal'
+              error={touched.value && (!values.value || errors.value)}
+            />
+            <Box textAlign='center'>
+              <SendDialogButton
+                type='button'
+                size='large'
+                disabled={!touched.value || !isValid || isSubmitting}
+                handleSubmit={handleSubmit}
+              />
+            </Box>
+            <WalletTextField
+              name='bob_priv_key'
+              label='Recipient Private Key'
+              type='text'
+              placeholder='Private Key'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            <WalletTextField
+              name='bob_pub_key'
+              label='Recipient Public Key'
+              type='text'
+              placeholder='Public Key'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            <WalletTextField
+              name='bob_address'
+              label='Recipient Address'
+              type='text'
+              placeholder='Address'
+              fullWidth
+              variant='outlined'
+              margin='normal'
+            />
+            {!selector[1] && <LinearQuery />}
+            <Box mt={1}>
+              <Button
+                data-clipboard-text={bob.address}
+                className='btn'
+                type='button'
+                variant='outlined'
+                color='default'
+                size='medium'
+              >
+                ADDR COPY
+              </Button>
+            </Box>
+          </Form>
+        )}
+      </Formik>
+    </Box>
+  );
+};
 
 // { selector: Array( 2 ) }
 // selector: Array( 2 )

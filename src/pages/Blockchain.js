@@ -127,7 +127,7 @@ import Chain from "layouts/lists/Chain";
 //   }),
 // };
 
-export default function C() {
+export default () => {
   // Axios GET /chain => Blockchain Data
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -140,17 +140,17 @@ export default function C() {
   // const bobAmount = selector[ 2 ]
 
   return (
-    <Box minHeight='80vh'>
+    <Box minHeight='80vh' data-test='box'>
       {
         // :TODO: Alice & Bob Amount Display
       }
       {selector[0] &&
         selector[0].map((chain, index) => {
-          return <Chain key={index} chain={chain} />;
+          return <Chain key={index} chain={chain} data-test='chain' />;
         })}
     </Box>
   );
-}
+};
 
 // [
 //   [

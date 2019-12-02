@@ -11,14 +11,14 @@ export default () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname !== "/" && <Navigation />}
+      {location.pathname !== "/" && <Navigation data-test='navigation' />}
       <Switch>
         <Route path='/wallet' component={Wallet} />
         <Route path='/pool' component={Pool} />
         <Route path='/chain' component={Blockchain} />
         <Route path='/' component={Top} />
       </Switch>
-      {location.pathname !== "/" && <Footer />}
+      {location.pathname !== "/" && <Footer data-test='footer' />}
     </>
   );
 };

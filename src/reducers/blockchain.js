@@ -1,15 +1,15 @@
 import types from "actionTypes";
 
-function initialState() {
+const initialState = () => {
   return {
     wallet: {},
     pool: [],
     mining: {},
     chain: {},
   };
-}
+};
 
-export default function(state = initialState(), action) {
+export default (state = initialState(), action) => {
   switch (action.type) {
     case types.GET_WALLET:
       return { ...state, wallet: action.response.data };
@@ -24,4 +24,4 @@ export default function(state = initialState(), action) {
     default:
       return state;
   }
-}
+};

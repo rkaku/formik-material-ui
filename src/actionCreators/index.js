@@ -2,6 +2,13 @@ import axios from "api/axiosHeroku";
 import heroku from "api/heroku";
 import types from "actionTypes";
 
+/**
+|--------------------------------------------------
+| Returns Redux Thunk function that dispatches GET_WALLET action.
+| @function getWallet
+| @returns {function} - Redux Thunk function.
+|--------------------------------------------------
+*/
 export function getWallet() {
   return async dispatch => {
     const response = await axios({
@@ -12,6 +19,14 @@ export function getWallet() {
   };
 }
 
+/**
+|--------------------------------------------------
+| Returns Redux Thunk function that dispatches SEND_MONEY action.
+| @function sendMoney
+| @param values - Private Key, Public Key, Address, Amount(BTC)
+| @returns {function} - Redux Thunk function.
+|--------------------------------------------------
+*/
 export function sendMoney(values) {
   return async dispatch => {
     await axios({
@@ -23,6 +38,13 @@ export function sendMoney(values) {
   };
 }
 
+/**
+|--------------------------------------------------
+| Returns Redux Thunk function that dispatches GET_POOL action.
+| @function getPool
+| @returns {function} - Redux Thunk function.
+|--------------------------------------------------
+*/
 export function getPool() {
   return async dispatch => {
     const response = await axios({
@@ -33,16 +55,31 @@ export function getPool() {
   };
 }
 
+/**
+|--------------------------------------------------
+| Returns Redux Thunk function that dispatches GET_MINE action.
+| @function getMine
+| @returns {function} - Redux Thunk function.
+|--------------------------------------------------
+*/
 export function getMine() {
   return async dispatch => {
     const response = await axios({
       method: "GET",
       url: heroku.MINE,
     });
+    console.log({ response });
     dispatch({ type: types.GET_MINE, response });
   };
 }
 
+/**
+|--------------------------------------------------
+| Returns Redux Thunk function that dispatches GET_CHAIN action.
+| @function getChain
+| @returns {function} - Redux Thunk function.
+|--------------------------------------------------
+*/
 export function getChain() {
   return async dispatch => {
     const response = await axios({

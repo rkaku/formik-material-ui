@@ -1,6 +1,6 @@
 import axios from "api/axiosHeroku";
 import heroku from "api/heroku";
-import types from "actionTypes";
+// import types from "actionTypes";
 import * as Actions from "actionCreators/blockchain";
 
 /**

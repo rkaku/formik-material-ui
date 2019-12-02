@@ -1,111 +1,64 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import PropTypes from "prop-types";
-// import { makeStyles } from "@material-ui/core/styles";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import Divider from "@material-ui/core/Divider";
-// import Paper from "@material-ui/core/Paper";
-// import Grid from "@material-ui/core/Grid";
-// import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
-// import FormatBoldIcon from "@material-ui/icons/FormatBold";
+import React, { Component } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import MineButton from "layouts/buttons/MineButton";
 import Box from "@material-ui/core/Box";
-import * as Actions from "actionCreators";
-import Pool from "layouts/lists/Pool";
+// import * as Actions from "actionCreators";
+import { getMine, getPool } from "actionCreators";
+import PoolDisplay from "layouts/lists/Pool";
 
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     width: "100%",
-//     maxWidth: 960,
-//     backgroundColor: theme.palette.background.paper,
-//   },
-//   control: {
-//     padding: theme.spacing(2),
-//   },
-// } ) );
+class Pool extends Component {
+  componentDidMount() {
+    this.props.getPool();
+  }
 
-// function Pool({ transaction }) {
-//   const classes = useStyles();
+  _handleOnClick = () => this.props.getMine();
+
+  render() {
+    const { selector } = this.props;
+    return (
+      <Box minHeight='80vh'>
+        <Box m={2}>
+          <MineButton onClick={this._handleOnClick} />
+        </Box>
+        {selector &&
+          selector.map((transaction, index) => {
+            return <PoolDisplay key={index} transaction={transaction} />;
+          })}
+      </Box>
+    );
+  }
+}
+
+const mapStateToProps = state => ({ selector: state.blockchain.pool });
+
+export default connect(mapStateToProps, { getMine, getPool })(Pool);
+
+// export default Pool = () => {
+//   // Axios GET /pool => Transaction Pool Data
+//   const dispatch = useDispatch();
+//   React.useEffect(() => {
+//     dispatch(Actions.getPool());
+//   }, [dispatch]);
+//   const selector = useSelector(state => state.blockchain.pool);
+
+//   // Axios GET /mine => Mining
+//   const _handleOnClick = React.useCallback(() => {
+//     dispatch(Actions.getMine());
+//   }, [dispatch]);
+
 //   return (
-//     <Box maxWidth='840px' ml='auto' mr='auto'>
-//       <Grid container className={classes.root} spacing={2}>
-//         <Grid item xs={12}>
-//           <Paper className={classes.control}>
-//             <List
-//               component='nav'
-//               className={classes.root}
-//               aria-label='contacts'
-//             >
-//               <Divider />
-//               <ListItem button>
-//                 <ListItemIcon>
-//                   <EmailOutlinedIcon />
-//                 </ListItemIcon>
-//                 <ListItemText
-//                   primary={`Sender Address: ${transaction.sender_address}`}
-//                 />
-//               </ListItem>
-//               <Divider variant='middle' />
-//               <ListItem button>
-//                 <ListItemIcon>
-//                   <EmailOutlinedIcon />
-//                 </ListItemIcon>
-//                 <ListItemText
-//                   primary={`Recipient Address: ${transaction.recipient_address}`}
-//                 />
-//               </ListItem>
-//               <Divider variant='middle' />
-//               <ListItem button>
-//                 <ListItemIcon>
-//                   <FormatBoldIcon />
-//                 </ListItemIcon>
-//                 <ListItemText primary={`Amount: ${transaction.value} BTC`} />
-//               </ListItem>
-//               <Divider />
-//             </List>
-//           </Paper>
-//         </Grid>
-//       </Grid>
+//     <Box minHeight='80vh'>
+//       <Box m={2}>
+//         <MineButton onClick={_handleOnClick} />
+//       </Box>
+//       {selector &&
+//         selector.map((transaction, index) => {
+//           return <PoolDisplay key={index} transaction={transaction} />;
+//         })}
 //     </Box>
 //   );
-// }
-
-// Pool.propTypes = {
-//   transaction: PropTypes.shape({
-//     recipient_address: PropTypes.string.isRequired,
-//     sender_address: PropTypes.string.isRequired,
-//     value: PropTypes.number.isRequired,
-//   }),
 // };
-
-export default () => {
-  // Axios GET /pool => Transaction Pool Data
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(Actions.getPool());
-  }, [dispatch]);
-  const selector = useSelector(state => state.blockchain.pool);
-
-  // Axios GET /mine => Mining
-  const _handleOnClick = React.useCallback(() => {
-    dispatch(Actions.getMine());
-  }, [dispatch]);
-
-  return (
-    <Box minHeight='80vh'>
-      <Box m={2}>
-        <MineButton onClick={_handleOnClick} />
-      </Box>
-      {selector &&
-        selector.map((transaction, index) => {
-          return <Pool key={index} transaction={transaction} />;
-        })}
-    </Box>
-  );
-};
 
 // [
 //   {

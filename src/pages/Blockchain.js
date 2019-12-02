@@ -31,7 +31,7 @@ const mapStateToProps = state => ({ selector: state.blockchain.chain });
 
 export default connect(mapStateToProps, { getChain })(Blockchain);
 
-// const Blockchain = () => {
+// export default Blockchain = () => {
 //   // Axios GET /chain => Blockchain Data
 //   const dispatch = useDispatch();
 //   React.useEffect(() => {

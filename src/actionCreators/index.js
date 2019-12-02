@@ -1,6 +1,7 @@
 import axios from "api/axiosHeroku";
 import heroku from "api/heroku";
 import types from "actionTypes";
+import * as Actions from "actionCreators/blockchain";
 
 /**
 |--------------------------------------------------
@@ -15,7 +16,8 @@ export function getWallet() {
       method: "GET",
       url: heroku.WALLET,
     });
-    dispatch({ type: types.GET_WALLET, response: response });
+    // dispatch({ type: types.GET_WALLET, response: response });
+    dispatch(Actions.getWallet(response));
   };
 }
 
@@ -34,7 +36,8 @@ export function sendMoney(values) {
       url: heroku.SEND,
       data: values,
     });
-    dispatch({ type: types.POST_SEND_MONEY, values });
+    // dispatch({ type: types.POST_SEND_MONEY, values });
+    dispatch(Actions.sendMoney(values));
   };
 }
 
@@ -51,7 +54,8 @@ export function getPool() {
       method: "GET",
       url: heroku.POOL,
     });
-    dispatch({ type: types.GET_POOL, response });
+    // dispatch({ type: types.GET_POOL, response });
+    dispatch(Actions.getPool(response));
   };
 }
 
@@ -69,7 +73,8 @@ export function getMine() {
       url: heroku.MINE,
     });
     console.log({ response });
-    dispatch({ type: types.GET_MINE, response });
+    // dispatch({ type: types.GET_MINE, response });
+    dispatch(Actions.getMine(response));
   };
 }
 
@@ -86,6 +91,7 @@ export function getChain() {
       method: "GET",
       url: heroku.CHAIN,
     });
-    dispatch({ type: types.GET_CHAIN, response });
+    // dispatch({ type: types.GET_CHAIN, response });
+    dispatch(Actions.getChain(response));
   };
 }

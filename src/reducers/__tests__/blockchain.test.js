@@ -99,6 +99,6 @@ describe("Blockchain Reducer", () => {
       type: types.GET_CHAIN,
       response: { data: data },
     });
-    expect(newState.chainw).toEqual(data);
+    expect(newState.chain).toEqual(data);
   });
 });

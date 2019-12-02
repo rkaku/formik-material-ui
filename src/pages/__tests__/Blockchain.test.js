@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import findByTestAttr from "test/findByTestAttr";
+// import testStore from "test/testStore";
 import Blockchain from "pages/Blockchain";
 import Store from "store";
 
@@ -11,10 +12,10 @@ import Store from "store";
  * @param {object} state - Initial state for this setup.
  * @returns {ShallowWrapper}
  */
-const setUp = (props = {}, state = null) => {
+const setUp = (initialState = {}) => {
   const wrapper = shallow(
     <Store>
-      <Blockchain {...props} />
+      <Blockchain />
     </Store>,
   );
   return wrapper;

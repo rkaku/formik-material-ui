@@ -1,8 +1,33 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import { useField } from 'formik'
-import PropTypes from 'prop-types'
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import { useField } from "formik";
+import PropTypes from "prop-types";
 
+export default function WalletTextField(props) {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <TextField {...field} {...props} />
+      {meta.error && meta.touched && (
+        <small style={{ color: "darkred" }}>{meta.error}</small>
+      )}
+    </>
+  );
+}
+
+WalletTextField.propTypes = {
+  props: PropTypes.shape({
+    error: PropTypes.string,
+    fillWidth: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+    margin: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    required: PropTypes.bool,
+    type: PropTypes.string.isRequired,
+    variant: PropTypes.string.isRequired,
+  }),
+};
 
 // { props: { … } }
 // props:
@@ -24,33 +49,6 @@ import PropTypes from 'prop-types'
 // placeholder: "Address"
 // required: true
 // type: "text"
-WalletTextField.propTypes = {
-  props: PropTypes.shape( {
-    error: PropTypes.string,
-    fillWidth: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
-    margin: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-    required: PropTypes.bool,
-    type: PropTypes.string.isRequired,
-    variant: PropTypes.string.isRequired
-  } )
-}
-
-export default function WalletTextField ( props ) {
-  const [ field, meta ] = useField( props )
-  return (
-    <>
-      <TextField
-        { ...field }
-        { ...props }
-      />
-      { meta.error && meta.touched && <small style={ { color: 'darkred' } }>{ meta.error }</small> }
-    </>
-  )
-}
-
 
 // field
 
@@ -60,7 +58,6 @@ export default function WalletTextField ( props ) {
 // onBlur: ƒ( eventOrString )
 // onChange: ƒ( eventOrPath )
 // value: ""
-
 
 // meta
 

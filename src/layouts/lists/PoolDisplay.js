@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Pool(props) {
   console.log(props);
-  const transaction = props;
+  const { transaction } = props;
   const classes = useStyles();
   return (
     <Box maxWidth='840px' ml='auto' mr='auto'>

@@ -1,23 +1,18 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import findByTestAttr from "test/findByTestAttr";
-// import testStore from "test/testStore";
+import storeFactory from "test/storeFactory";
 import Blockchain from "pages/Blockchain";
-import Store from "store";
 
 /**
- * Factory function to create a ShallowWrapper for the App component.
+ * Factory function to create a ReactWrapper for the App component.
  * @function setup
- * @param {object} props - Component props specific to this setup.
  * @param {object} state - Initial state for this setup.
- * @returns {ShallowWrapper}
+ * @returns {ReactWrapper}
  */
 const setUp = (initialState = {}) => {
-  const wrapper = shallow(
-    <Store>
-      <Blockchain />
-    </Store>,
-  );
+  const store = storeFactory(initialState);
+  const wrapper = mount(<Blockchain store={store} />);
   return wrapper;
 };
 
@@ -28,11 +23,13 @@ describe("Blockchain Component", () => {
     component = setUp();
   });
 
+  afterEach(() => {
+    component.unmount();
+  });
+
   it("renders box without errors", () => {
     const box = findByTestAttr(component, "box");
-    // expect(box.length).toEqual(1);
-    console.log(component.debug());
-    console.log(box.debug());
+    expect(box.length).toEqual(2);
   });
 
   it("renders chain without errors", () => {
@@ -40,3 +37,11 @@ describe("Blockchain Component", () => {
     expect(chain.length).toEqual(0);
   });
 });
+
+// <Connect(Blockchain) store={{...}}>
+//   <Blockchain store={{...}} selector={{...}} getChain={[Function]}>
+//     <Styled(MuiBox) minHeight="80vh" data-test="box">
+//       <div className="MuiBox-root MuiBox-root-2" data-test="box" />
+//     </Styled(MuiBox)>
+//   </Blockchain>
+// </Connect(Blockchain)>

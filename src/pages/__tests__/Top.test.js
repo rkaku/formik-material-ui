@@ -6,12 +6,11 @@ import Top from "pages/Top";
 /**
  * Factory function to create a ShallowWrapper for the App component.
  * @function setup
- * @param {object} props - Component props specific to this setup.
  * @param {object} state - Initial state for this setup.
  * @returns {ShallowWrapper}
  */
 const setUp = (props = {}, state = null) => {
-  const wrapper = shallow(<Top {...props} />);
+  const wrapper = shallow(<Top />);
   return wrapper;
 };
 

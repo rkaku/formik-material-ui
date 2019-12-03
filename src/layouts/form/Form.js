@@ -10,7 +10,6 @@ import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 
 export default function FormDisplay(props) {
-  console.log({ props });
   const { _handleSubmit, selector } = props;
   // Clipboard.js => Address Copy
   new Clipboard(".btn");

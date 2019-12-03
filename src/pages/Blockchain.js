@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 // import * as Actions from "actionCreators";
 import { getChain } from "actionCreators";
-import Chain from "layouts/lists/Chain";
+import ChainDisplay from "layouts/lists/ChainDisplay";
 
-class Blockchain extends Component {
+export class Blockchain extends Component {
   componentDidMount() {
     this.props.getChain();
   }
@@ -20,7 +20,7 @@ class Blockchain extends Component {
         }
         {selector[0] &&
           selector[0].map((chain, index) => {
-            return <Chain key={index} chain={chain} data-test='chain' />;
+            return <ChainDisplay key={index} chain={chain} data-test='chain' />;
           })}
       </Box>
     );

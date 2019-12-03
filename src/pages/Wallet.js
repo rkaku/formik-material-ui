@@ -12,7 +12,13 @@ class Wallet extends Component {
 
   render() {
     const { selector } = this.props;
-    return <Form selector={selector} _handleSubmit={this._handleSubmit} />;
+    return (
+      <Form
+        selector={selector}
+        _handleSubmit={this._handleSubmit}
+        data-test='form'
+      />
+    );
   }
 }
 

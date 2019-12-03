@@ -5,7 +5,7 @@ import MineButton from "layouts/buttons/MineButton";
 import Box from "@material-ui/core/Box";
 // import * as Actions from "actionCreators";
 import { getMine, getPool } from "actionCreators";
-import PoolDisplay from "layouts/lists/Pool";
+import PoolDisplay from "layouts/lists/PoolDisplay";
 
 class Pool extends Component {
   componentDidMount() {

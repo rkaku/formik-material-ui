@@ -18,7 +18,7 @@ export default function WalletTextField(props) {
 WalletTextField.propTypes = {
   props: PropTypes.shape({
     error: PropTypes.string,
-    fillWidth: PropTypes.bool.isRequired,
+    fullWidth: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     margin: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

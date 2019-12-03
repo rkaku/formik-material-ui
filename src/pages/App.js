@@ -14,7 +14,6 @@ import Footer from "layouts/navigation/Footer";
 
 class App extends Component {
   render() {
-    console.log(this.props);
     const location = this.props.location;
     return (
       <>

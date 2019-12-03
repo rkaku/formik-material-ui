@@ -72,7 +72,6 @@ export function getMine() {
       method: "GET",
       url: heroku.MINE,
     });
-    console.log({ response });
     // dispatch({ type: types.GET_MINE, response });
     dispatch(Actions.getMine(response));
   };

@@ -6,14 +6,15 @@ import Wallet from "pages/Wallet";
 import Pool from "pages/Pool";
 import Blockchain from "pages/Blockchain";
 import Top from "pages/Top";
+import Navigation from "layouts/navigation/Navigation";
+import Footer from "layouts/navigation/Footer";
 import Store from "store";
 
 /**
- * Factory function to create a ShallowWrapper for the App component.
+ * Factory function to create a ReactWrapper for the App component.
  * @function setup
- * @param {object} props - Component props specific to this setup.
- * @param {object} state - Initial state for this setup.
- * @returns {ShallowWrapper}
+ * @param {Array} initialEntries - An array of location(s) in the history stack.
+ * @returns {ReactWrapper}
  */
 const setUp = initialEntries => {
   const wrapper = mount(
@@ -28,24 +29,35 @@ const setUp = initialEntries => {
 
 describe("App Component", () => {
   let component;
+  afterEach(() => {
+    component.unmount();
+  });
 
-  it("renders Wallet without errors", () => {
+  it("renders Wallet, Navigation, and Footer without errors", () => {
     component = setUp(["/wallet"]);
     expect(component.find(Wallet).length).toEqual(1);
+    expect(component.find(Navigation).length).toEqual(1);
+    expect(component.find(Footer).length).toEqual(1);
   });
 
-  it("renders Pool without errors", () => {
+  it("renders Pool, Navigation, and Footer without errors", () => {
     component = setUp(["/pool"]);
     expect(component.find(Pool).length).toEqual(1);
+    expect(component.find(Navigation).length).toEqual(1);
+    expect(component.find(Footer).length).toEqual(1);
   });
 
-  it("renders Blockchain without errors", () => {
+  it("renders Blockchain, Navigation, and Footer without errors", () => {
     component = setUp(["/chain"]);
     expect(component.find(Blockchain).length).toEqual(1);
+    expect(component.find(Navigation).length).toEqual(1);
+    expect(component.find(Footer).length).toEqual(1);
   });
 
-  it("renders Top without errors", () => {
+  it("renders Top, no Navigation, and no Footer without errors", () => {
     component = setUp(["/"]);
     expect(component.find(Top).length).toEqual(1);
+    expect(component.find(Navigation).length).toEqual(0);
+    expect(component.find(Footer).length).toEqual(0);
   });
 });

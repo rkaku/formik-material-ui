@@ -7,7 +7,7 @@ import Blockchain from "pages/Blockchain";
 /**
  * Factory function to create a ReactWrapper for the App component.
  * @function setup
- * @param {object} state - Initial state for this setup.
+ * @param {object} initialState - Initial state for this setup.
  * @returns {ReactWrapper}
  */
 const setUp = (initialState = {}) => {

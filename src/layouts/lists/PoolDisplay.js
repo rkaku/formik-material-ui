@@ -1,5 +1,4 @@
 import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -11,9 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import FormatBoldIcon from "@material-ui/icons/FormatBold";
-// import MineButton from "layouts/buttons/MineButton";
 import Box from "@material-ui/core/Box";
-// import * as Actions from "actionCreators";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +23,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Pool({ transaction }) {
+export default function Pool(props) {
+  console.log(props);
+  const transaction = props;
   const classes = useStyles();
   return (
     <Box maxWidth='840px' ml='auto' mr='auto'>
@@ -79,3 +78,22 @@ Pool.propTypes = {
     value: PropTypes.number.isRequired,
   }),
 };
+
+// transaction: recipient_address: "2hFPbbH2DaAU5KCpdZibZ3voCPegU5tSkHm";
+// sender_address: "9ELt9pVEH7k98nxBcGFW6J5SuJxX9SbKy9";
+// value: 100;
+
+// [
+//   {
+//     "recipient_address": "2hTpb6dPuGehb3d73y6LqRkdguBLe1aRjEf",
+//     "sender_address": "2LEgdLLaUnoS5yqmPPxXpq7BCPtmMPdw1jV",
+//     "value": 100
+//   }
+// ]
+
+// { transaction: { … } }
+// transaction:
+// recipient_address: "2d61Xrz2GnRbTj7zjXT7NodtgaZXvmAJPEX"
+// sender_address: "m68BpefzBQ3aZ1LMB6gMy569eoUai371y1"
+// value: 100
+// __proto__: Object

@@ -73,6 +73,7 @@ class MineButton extends Component {
     );
   }
 }
+
 const styles = theme => ({
   root: {
     display: "flex",

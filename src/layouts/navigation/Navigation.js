@@ -1,50 +1,49 @@
-import React from 'react';
-import './Navigation.css';
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import "./Navigation.css";
+import { NavLink } from "react-router-dom";
 
-
-export default function Navigation () {
+export default function Navigation() {
   return (
-    <div className="nav">
-      <header className="nav-header">
-        <ul className="ul-style">
-          <li className="li-style">
+    <div className='nav'>
+      <header className='nav-header'>
+        <ul className='ul-style'>
+          <li className='li-style'>
             <NavLink
-              className="nav-link"
-              to="/wallet"
+              className='nav-link'
+              to='/wallet'
               exact
-              activeClassName="active-link"
+              activeClassName='active-link'
             >
               WALLETS
-                </NavLink>
+            </NavLink>
           </li>
-          <li className="li-style">
+          <li className='li-style'>
             <NavLink
-              className="nav-link"
-              to="/pool"
+              className='nav-link'
+              to='/pool'
               exact
-              activeClassName="active-link"
+              activeClassName='active-link'
             >
-              {/* TRAN POOL */ }
+              {/* TRAN POOL */}
               TRANSACTION POOL
-                </NavLink>
+            </NavLink>
           </li>
-          <li className="li-style">
+          <li className='li-style'>
             <NavLink
-              className="nav-link"
-              to="/chain"
+              className='nav-link'
+              to='/chain'
               exact
-              activeClassName="active-link"
+              activeClassName='active-link'
             >
               BLOCKCHAIN
-                </NavLink>
+            </NavLink>
           </li>
-          <li className="li-style">
+          <li className='li-style'>
             <NavLink
-              className="nav-link"
-              to="/"
+              className='nav-link'
+              to='/'
               exact
-              activeClassName="active-link"
+              activeClassName='active-link'
             >
               TOP PAGE
             </NavLink>
@@ -52,5 +51,5 @@ export default function Navigation () {
         </ul>
       </header>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-// import React from "react";
-// import { shallow } from "enzyme";
+import React from "react";
+import { shallow } from "enzyme";
 import Form from "layouts/form/Form";
 import checkProps from "test/checkProps";
 
@@ -9,11 +9,11 @@ import checkProps from "test/checkProps";
  * @param {object} state - Initial state for this setup.
  * @returns {ReactWrapper}
  */
-// const setUp = (state = {}) => {
-//   // const store = storeFactory(initialState);
-//   const wrapper = shallow(<Form />);
-//   return wrapper;
-// };
+const setUp = (state = {}) => {
+  // const store = storeFactory(initialState);
+  const wrapper = shallow(<Form />);
+  return wrapper;
+};
 
 describe("Form Component", () => {
   describe("Checking PropTypes", () => {

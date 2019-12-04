@@ -1,12 +1,9 @@
 import React from "react";
 import { mount } from "enzyme";
 import Store from "store";
-// import findByTestAttr from "test/findByTestAttr";
-// import storeFactory from "test/storeFactory";
 import Pool from "pages/Pool";
 import Box from "@material-ui/core/Box";
 import MineButton from "layouts/buttons/MineButton";
-// import PoolDisplay from "layouts/lists/PoolDisplay";
 
 /**
  * Factory function to create a ReactWrapper for the App component.

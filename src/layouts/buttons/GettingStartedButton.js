@@ -1,34 +1,25 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx, css } from '@emotion/core'
-import Fab from '@material-ui/core/Fab'
-import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React from "react";
+import { jsx, css } from "@emotion/core";
+import Fab from "@material-ui/core/Fab";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-
-// { props: { … } }
-// props: to: "/wallet"
-EmotionCSS.propTypes = {
-  props: PropTypes.shape( {
-    to: PropTypes.string.isRequired
-  } )
-}
-
-export default function EmotionCSS ( props ) {
+export default function EmotionCSS(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
       <Fab
-        { ...props }
-        css={ css`
+        {...props}
+        css={css`
           font-size: calc(10px + 1.4vmin);
           position: absolute;
           top: 80%;
           left: 17%;
-          -ms-transform: translate(-50%,-50%);
-          -webkit-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
+          -ms-transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
           background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
           border-radius: 3px;
           border: 0;
@@ -40,22 +31,29 @@ export default function EmotionCSS ( props ) {
             color: papayawhip;
           }
         `}
-        variant="extended"
-        size="large"
-        color="primary"
-        aria-label="add"
-        className={ classes.margin }
-        component={ Link }
+        variant='extended'
+        size='large'
+        color='primary'
+        aria-label='add'
+        className={classes.margin}
+        component={Link}
       >
         Getting Started
-        </Fab>
+      </Fab>
     </React.Fragment>
-  )
+  );
 }
 
+EmotionCSS.propTypes = {
+  props: PropTypes.shape({
+    to: PropTypes.string.isRequired,
+  }),
+};
+// { props: { … } }
+// props: to: "/wallet"
 
-const useStyles = makeStyles( theme => ( {
+const useStyles = makeStyles(theme => ({
   margin: {
-    margin: theme.spacing( 1 ),
+    margin: theme.spacing(1),
   },
-} ) )
+}));

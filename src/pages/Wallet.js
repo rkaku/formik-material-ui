@@ -16,7 +16,7 @@ class Wallet extends Component {
       <Form
         selector={selector}
         _handleSubmit={this._handleSubmit}
-        data-test='form'
+        data-test='FormComponent'
       />
     );
   }

@@ -10,7 +10,9 @@ import rootReducer from "reducers";
 
 export const middleware = [reduxThunk];
 
-export const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
+export const createStoreWithMiddleware = applyMiddleware(...middleware)(
+  createStore,
+);
 
 export const store = createStoreWithMiddleware(rootReducer);
 

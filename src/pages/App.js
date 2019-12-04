@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Route,
-  Switch,
-  withRouter,
-  // useLocation,
-} from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Blockchain from "pages/Blockchain";
 import Wallet from "pages/Wallet";
 import Pool from "pages/Pool";

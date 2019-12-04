@@ -1,19 +1,18 @@
-import React from 'react';
-import './Navigation.css';
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import "./Navigation.css";
+import { NavLink } from "react-router-dom";
 
-
-export default function Navigation () {
+export default function Navigation() {
   return (
-    <div className="nav">
-      <header className="nav-footer">
-        <ul className="ul-style-footer">
-          <li className="li-style-footer">
+    <div className='nav'>
+      <header className='nav-footer'>
+        <ul className='ul-style-footer'>
+          <li className='li-style-footer'>
             <NavLink
-              className="nav-link"
-              to="/"
+              className='nav-link'
+              to='/'
               exact
-              activeClassName="active-link"
+              activeClassName='active-link'
             >
               &copy;Blockchain Playground
             </NavLink>
@@ -21,5 +20,5 @@ export default function Navigation () {
         </ul>
       </header>
     </div>
-  )
+  );
 }

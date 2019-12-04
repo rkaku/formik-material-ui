@@ -1,4 +1,4 @@
-@media screen and (min-width: 690px) {
+@media screen and (min-width: 1234px) {
   .nav {
     text-align: center;
   }
@@ -68,7 +68,7 @@
   }
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 1234px) {
   .nav {
     text-align: center;
   }

@@ -58,6 +58,7 @@ export default function FormDisplay(props) {
   return (
     <Box ml={2} mr={2}>
       <Formik
+        data-test='Formik'
         enableReinitialize={true}
         initialValues={initialValues}
         validationSchema={Yup.object().shape({
@@ -74,8 +75,9 @@ export default function FormDisplay(props) {
         }}
       >
         {({ isSubmitting, isValid, values, touched, errors, handleSubmit }) => (
-          <Form>
+          <Form data-test='Form'>
             <WalletTextField
+              data-test='SenderPrivateKey'
               name='sender_priv_key'
               label='Sender Private Key'
               type='text'
@@ -85,6 +87,7 @@ export default function FormDisplay(props) {
               margin='normal'
             />
             <WalletTextField
+              data-test='SenderPublicKey'
               name='sender_pub_key'
               label='Sender Public Key'
               type='text'
@@ -94,6 +97,7 @@ export default function FormDisplay(props) {
               margin='normal'
             />
             <WalletTextField
+              data-test='SenderAddress'
               name='sender_address'
               label='Sender Address'
               type='text'
@@ -104,6 +108,7 @@ export default function FormDisplay(props) {
             />
             {!selector[0] && <LinearQuery />}
             <WalletTextField
+              data-test='InputRecipientAddress'
               name='recipient_address'
               label='Recipient Address'
               type='text'
@@ -117,6 +122,7 @@ export default function FormDisplay(props) {
               }
             />
             <WalletTextField
+              data-test='InputAmount'
               name='value'
               label='Amount (BTC)'
               type='text'
@@ -128,6 +134,7 @@ export default function FormDisplay(props) {
             />
             <Box textAlign='center'>
               <SendDialogButton
+                data-test='SendDialogButton'
                 type='button'
                 size='large'
                 disabled={!touched.value || !isValid || isSubmitting}
@@ -135,6 +142,7 @@ export default function FormDisplay(props) {
               />
             </Box>
             <WalletTextField
+              data-test='RecipientPrivateKey'
               name='bob_priv_key'
               label='Recipient Private Key'
               type='text'
@@ -144,6 +152,7 @@ export default function FormDisplay(props) {
               margin='normal'
             />
             <WalletTextField
+              data-test='RecipientPublicKey'
               name='bob_pub_key'
               label='Recipient Public Key'
               type='text'
@@ -153,6 +162,7 @@ export default function FormDisplay(props) {
               margin='normal'
             />
             <WalletTextField
+              data-test='RecipientAddress'
               name='bob_address'
               label='Recipient Address'
               type='text'
@@ -162,8 +172,9 @@ export default function FormDisplay(props) {
               margin='normal'
             />
             {!selector[1] && <LinearQuery />}
-            <Box mt={1}>
+            <Box mt={1} data-test="Box">
               <Button
+                data-test='ClipboardButton'
                 data-clipboard-text={bob.address}
                 className='btn'
                 type='button'

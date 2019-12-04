@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
 import Box from "@material-ui/core/Box";
-// import * as Actions from "actionCreators";
 import { getChain } from "actionCreators";
 import ChainDisplay from "layouts/lists/ChainDisplay";
 

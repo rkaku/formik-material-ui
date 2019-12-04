@@ -4,22 +4,6 @@ import Fab from '@material-ui/core/Fab'
 import SendOutlined from '@material-ui/icons/SendOutlined'
 import PropTypes from 'prop-types'
 
-
-// { props: { … } }
-// props:
-// disabled: true
-// onClick: () => { setOpen( true ); }
-// size: "large"
-// type: "submit"
-FloatingActionButtons.propTypes = {
-  props: PropTypes.shape( {
-    disabled: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-    size: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
-  } )
-}
-
 export default function FloatingActionButtons ( props ) {
   const classes = useStyles()
   return (
@@ -32,6 +16,21 @@ export default function FloatingActionButtons ( props ) {
   )
 }
 
+FloatingActionButtons.propTypes = {
+  props: PropTypes.shape( {
+    disabled: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+    size: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
+  } )
+}
+
+// { props: { … } }
+// props:
+// disabled: true
+// onClick: () => { setOpen( true ); }
+// size: "large"
+// type: "submit"
 
 const useStyles = makeStyles( theme => ( {
   fab: {

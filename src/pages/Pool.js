@@ -4,8 +4,6 @@ import Box from "@material-ui/core/Box";
 import PoolDisplay from "layouts/lists/PoolDisplay";
 import MineButton from "layouts/buttons/MineButton";
 import { getMine, getPool } from "actionCreators";
-// import { useDispatch, useSelector } from "react-redux";
-// import * as Actions from "actionCreators";
 
 class Pool extends Component {
   componentDidMount() {

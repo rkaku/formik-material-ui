@@ -17,14 +17,14 @@ class App extends Component {
     const location = this.props.location;
     return (
       <>
-        {location.pathname !== "/" && <Navigation data-test='navigation' />}
+        {location.pathname !== "/" && <Navigation />}
         <Switch>
           <Route path='/wallet' component={Wallet} />
           <Route path='/pool' component={Pool} />
           <Route path='/chain' component={Blockchain} />
           <Route path='/' component={Top} />
         </Switch>
-        {location.pathname !== "/" && <Footer data-test='footer' />}
+        {location.pathname !== "/" && <Footer />}
       </>
     );
   }

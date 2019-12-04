@@ -1,8 +1,12 @@
-// import React from "react";
-// import { mount } from "enzyme";
+import React from "react";
+import { mount } from "enzyme";
+import Store from "store";
 // import findByTestAttr from "test/findByTestAttr";
 // import storeFactory from "test/storeFactory";
-// import Pool from "pages/Pool";
+import Pool from "pages/Pool";
+import Box from "@material-ui/core/Box";
+import MineButton from "layouts/buttons/MineButton";
+// import PoolDisplay from "layouts/lists/PoolDisplay";
 
 /**
  * Factory function to create a ReactWrapper for the App component.
@@ -10,23 +14,31 @@
  * @param {object} state - Initial state for this setup.
  * @returns {ReactWrapper}
  */
-// const setUp = (initialState = {}) => {
-//   const store = storeFactory(initialState);
-//   const wrapper = mount(<Pool store={store} />);
-//   return wrapper;
-// };
+const setUp = (initialState = {}) => {
+  const wrapper = mount(
+    <Store>
+      <Pool />
+    </Store>,
+  );
+  return wrapper;
+};
 
 describe("Pool Component", () => {
-  // let component;
+  let component;
 
-  // beforeEach(() => {
-  //   component = setUp();
-  // });
+  beforeEach(() => {
+    component = setUp();
+  });
 
-  // afterEach(() => {
-  //   component.unmount();
-  // });
+  afterEach(() => {
+    component.unmount();
+  });
 
-  it("renders without errors", () => {
+  it("renders MineButton without errors", () => {
+    expect(component.find(MineButton).length).toEqual(1);
+  });
+
+  it("renders Box without errors", () => {
+    expect(component.find(Box).length).toEqual(2);
   });
 });

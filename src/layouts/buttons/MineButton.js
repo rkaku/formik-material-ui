@@ -8,14 +8,15 @@ import Fab from "@material-ui/core/Fab";
 
 class MineButton extends Component {
   state = {
-    isSuccess: {},
+    isSuccess: null,
     query: "idle",
   };
 
   timerRef = createRef();
+  location = this.props.location;
 
   componentDidMount() {
-    this.setState({ isSuccess: this.props.mining });
+    this.setState({ isSuccess: null });
     clearTimeout(this.timerRef.current);
   }
 
@@ -39,17 +40,16 @@ class MineButton extends Component {
     this.props.onClick();
     clearTimeout(this.timerRef.current);
 
-    if (this.query !== "idle") {
-      this.setState({ query: "idle" });
-      return;
-    }
     // Button Label => Now Mining...
-    this.setState({ query: "progress" });
+    if (this.query !== "idle") {
+      this.setState({ query: "progress" });
+      console.log(this.state.query);
+    }
 
     // Button Label Reset => Start Mining
     this.timerRef.current = setTimeout(() => {
       this.setState({ query: "idle" });
-    }, 1234);
+    }, 1000);
   };
 
   render() {
